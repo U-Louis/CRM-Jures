@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Sep 24, 2021 at 11:42 AM
--- Server version: 5.7.31
--- PHP Version: 7.3.21
+-- Hôte : 127.0.0.1:3306
+-- Généré le : jeu. 30 sep. 2021 à 14:29
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `crm_jures`
+-- Base de données : `crm_jures`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `conclure`
+-- Structure de la table `conclure`
 --
 
 DROP TABLE IF EXISTS `conclure`;
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `conclure` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Structure de la table `contact`
 --
 
 DROP TABLE IF EXISTS `contact`;
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `contact`
+-- Déchargement des données de la table `contact`
 --
 
 INSERT INTO `contact` (`ID_Contact`, `Nom_contact`, `Prenom_contact`, `Tel_contact`, `Tel2_contact`, `Mail_contact`, `NumeroAdresse_Contact`, `LibelleAdresse_Contact`, `ComplementAdresse_Contact`, `VilleAdresse_Contact`, `CodePostalAdresse_Contact`) VALUES
@@ -134,12 +134,17 @@ INSERT INTO `contact` (`ID_Contact`, `Nom_contact`, `Prenom_contact`, `Tel_conta
 ('9', 'Baillairgé', 'Gabriel ', 244020405, 644020405, 'b.gabriel@hotmail.fr', 14, 'impasse des cookies', '', 'Caelkirk', 53530),
 ('BEBER', 'Henry-Moisi', 'Bernard', 630303030, 231300330, 'beber.sauvelemonde@accolada.fr', 3, 'Rue du bullshit', '3E gauche', 'PARIS', 75000),
 ('BLUE', 'Bleue', 'Fleur', 636373839, 231323334, 'fleur.bleue@youpi.com', 55, 'Bld du gazon', 'Allée B', 'Jardin sur Erdre', 65321),
+('E01', 'Aplle', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('E02', 'Microzoft', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('E03', 'Gogole', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('E04', 'Linkedune', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('E05', 'Facebrique', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('JARDI', 'Jardylalaland', '', 2757575, 0, 'ca.existe.pas@newyork.times.co', 6, 'Rue du jardin', '', 'Caen', 14000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `correspondre`
+-- Structure de la table `correspondre`
 --
 
 DROP TABLE IF EXISTS `correspondre`;
@@ -153,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `correspondre` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detenir`
+-- Structure de la table `detenir`
 --
 
 DROP TABLE IF EXISTS `detenir`;
@@ -164,10 +169,46 @@ CREATE TABLE IF NOT EXISTS `detenir` (
   KEY `Detenir_Jure0_FK` (`ID_Jure`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `detenir`
+--
+
+INSERT INTO `detenir` (`ID_Habilitation`, `ID_Jure`) VALUES
+('h1', 'J1'),
+('h10', 'J10'),
+('h11', 'J11'),
+('h12', 'J12'),
+('h15', 'J13'),
+('h15', 'J14'),
+('h16', 'J15'),
+('h17', 'J16'),
+('h18', 'J19'),
+('h2', 'J2'),
+('h19', 'J20'),
+('h20', 'J21'),
+('h21', 'J22'),
+('h22', 'J23'),
+('h23', 'J24'),
+('h24', 'J25'),
+('h25', 'J26'),
+('h26', 'J27'),
+('h27', 'J28'),
+('h28', 'J29'),
+('h3', 'J3'),
+('h18', 'J30'),
+('h29', 'J30'),
+('h4', 'J4'),
+('h5', 'J5'),
+('h19', 'J6'),
+('h6', 'J6'),
+('h7', 'J7'),
+('h8', 'J8'),
+('h9', 'J9');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entreprise`
+-- Structure de la table `entreprise`
 --
 
 DROP TABLE IF EXISTS `entreprise`;
@@ -178,10 +219,21 @@ CREATE TABLE IF NOT EXISTS `entreprise` (
   KEY `Entreprise_Contact_FK` (`ID_Contact`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `entreprise`
+--
+
+INSERT INTO `entreprise` (`ID_Entreprise`, `ID_Contact`) VALUES
+('ENT1', 'E01'),
+('ENT2', 'E02'),
+('ENT3', 'E03'),
+('ENT4', 'E04'),
+('ENT5', 'E05');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formateur`
+-- Structure de la table `formateur`
 --
 
 DROP TABLE IF EXISTS `formateur`;
@@ -192,10 +244,20 @@ CREATE TABLE IF NOT EXISTS `formateur` (
   KEY `Formateur_Contact_FK` (`ID_Contact`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `formateur`
+--
+
+INSERT INTO `formateur` (`ID_formateur`, `ID_Contact`) VALUES
+('FOR01', '50'),
+('FOR02', '51'),
+('FOR03', '52'),
+('FOR04', '53');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formation`
+-- Structure de la table `formation`
 --
 
 DROP TABLE IF EXISTS `formation`;
@@ -211,10 +273,20 @@ CREATE TABLE IF NOT EXISTS `formation` (
   KEY `Formation_FormationPattern0_FK` (`ID_formationPattern`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `formation`
+--
+
+INSERT INTO `formation` (`ID_formation`, `Libelle_Formation`, `Date_DebutFormation`, `Date_FinFormation`, `ID_formateur`, `ID_formationPattern`) VALUES
+('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 'FOR01', 'DWWM'),
+('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 'FOR03', 'DWWM'),
+('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 'FOR02', 'RZO'),
+('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 'FOR04', 'RZO');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formationpattern`
+-- Structure de la table `formationpattern`
 --
 
 DROP TABLE IF EXISTS `formationpattern`;
@@ -225,10 +297,18 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
   PRIMARY KEY (`ID_formationPattern`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `formationpattern`
+--
+
+INSERT INTO `formationpattern` (`ID_formationPattern`, `Libelle_formationPatern`, `Descriptif_formation`) VALUES
+('DWWM', 'dev web & web mobile', 'On apprend plein de trucs supers'),
+('RZO', 'Formation réseau', 'On apprend plein de choses pour faire des rézos');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `habilitation`
+-- Structure de la table `habilitation`
 --
 
 DROP TABLE IF EXISTS `habilitation`;
@@ -243,10 +323,43 @@ CREATE TABLE IF NOT EXISTS `habilitation` (
   PRIMARY KEY (`ID_Habilitation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `habilitation`
+--
+
+INSERT INTO `habilitation` (`ID_Habilitation`, `Libelle_Habilitation`, `DebutValidite_Habilitation`, `FinValidite_Habilitation`, `VisibleVALCES`, `VisibleCERES`, `EnAttenteValidation`) VALUES
+('h1', 'Web', '2001-09-15', '2022-04-06', 1, 1, 0),
+('h10', 'Reseau', '1975-09-01', '2031-09-02', 1, 1, 0),
+('h11', 'Reseau', '1985-09-01', '2031-09-02', 1, 1, 0),
+('h12', 'Reseau', '1901-09-01', '2031-09-02', 1, 1, 0),
+('h15', 'Reseau', '2021-09-22', '2020-04-09', 1, 1, 0),
+('h16', 'Reseau', '2021-09-22', '2020-04-09', 1, 1, 0),
+('h17', 'Reseau', '2000-09-22', '2001-04-09', 1, 1, 0),
+('h18', 'Reseau', '2021-09-22', '2020-04-10', 1, 1, 0),
+('h19', 'Reseau', '2021-09-22', '2020-05-09', 1, 1, 0),
+('h2', 'Web', '2002-08-15', '2022-04-06', 1, 1, 0),
+('h20', 'Web', '2001-09-22', '2021-03-09', 1, 0, 0),
+('h21', 'Web', '2001-09-22', '2020-04-09', 1, 0, 0),
+('h22', 'Web', '2001-09-22', '2020-05-09', 0, 1, 0),
+('h23', 'Web', '2001-09-22', '2020-06-09', 0, 1, 0),
+('h24', 'Web', '2001-09-22', '2020-01-09', 0, 0, 0),
+('h25', 'Web', '2001-09-22', '2021-03-09', 0, 0, 1),
+('h26', 'Web', '2001-09-22', '2020-04-09', 0, 0, 1),
+('h27', 'Reseau', '2001-09-22', '2020-05-09', 0, 0, 1),
+('h28', 'Reseau', '2001-09-22', '2020-06-09', 0, 0, 1),
+('h29', 'Web', '2001-09-22', '2020-01-09', 0, 0, 1),
+('h3', 'Web', '2003-09-15', '2022-04-06', 1, 1, 0),
+('h4', 'Web', '2004-11-15', '2022-04-06', 1, 1, 0),
+('h5', 'Web', '2005-09-15', '2022-04-06', 1, 1, 0),
+('h6', 'Web', '2006-09-15', '2022-04-06', 1, 1, 0),
+('h7', 'Reseau', '1971-09-01', '2031-09-02', 1, 1, 0),
+('h8', 'Reseau', '1981-09-01', '2031-09-02', 1, 1, 0),
+('h9', 'Reseau', '1991-09-01', '2031-09-02', 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jure`
+-- Structure de la table `jure`
 --
 
 DROP TABLE IF EXISTS `jure`;
@@ -257,10 +370,47 @@ CREATE TABLE IF NOT EXISTS `jure` (
   KEY `Jure_Contact_FK` (`ID_Contact`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `jure`
+--
+
+INSERT INTO `jure` (`ID_Jure`, `ID_Contact`) VALUES
+('J1', '1'),
+('J10', '10'),
+('J11', '11'),
+('J12', '12'),
+('J13', '13'),
+('J14', '14'),
+('J15', '15'),
+('J16', '16'),
+('J17', '17'),
+('J18', '18'),
+('J19', '19'),
+('J2', '2'),
+('J20', '20'),
+('J21', '21'),
+('J22', '22'),
+('J23', '23'),
+('J24', '24'),
+('J25', '25'),
+('J26', '26'),
+('J27', '27'),
+('J28', '28'),
+('J29', '29'),
+('J3', '3'),
+('J30', '30'),
+('J4', '4'),
+('J5', '5'),
+('J6', '6'),
+('J7', '7'),
+('Gigi', '70'),
+('J8', '8'),
+('J9', '9');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessionexamen`
+-- Structure de la table `sessionexamen`
 --
 
 DROP TABLE IF EXISTS `sessionexamen`;
@@ -275,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `sessionexamen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `specialiste`
+-- Structure de la table `specialiste`
 --
 
 DROP TABLE IF EXISTS `specialiste`;
@@ -286,10 +436,57 @@ CREATE TABLE IF NOT EXISTS `specialiste` (
   KEY `specialiste_specialite0_FK` (`libelle_specialite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `specialiste`
+--
+
+INSERT INTO `specialiste` (`ID_Jure`, `libelle_specialite`) VALUES
+('J1', 'Charcuterie'),
+('J13', 'Charcuterie'),
+('J2', 'Charcuterie'),
+('J22', 'Charcuterie'),
+('J30', 'Charcuterie'),
+('J4', 'Charcuterie'),
+('Gigi', 'JavaScript'),
+('J10', 'JavaScript'),
+('J12', 'JavaScript'),
+('J14', 'JavaScript'),
+('J15', 'JavaScript'),
+('J2', 'JavaScript'),
+('J23', 'JavaScript'),
+('J3', 'JavaScript'),
+('J5', 'JavaScript'),
+('J7', 'JavaScript'),
+('J10', 'PHP'),
+('J14', 'PHP'),
+('J17', 'PHP'),
+('J20', 'PHP'),
+('J21', 'PHP'),
+('J26', 'PHP'),
+('J29', 'PHP'),
+('J6', 'PHP'),
+('J7', 'PHP'),
+('J12', 'SQL'),
+('J17', 'SQL'),
+('J18', 'SQL'),
+('J19', 'SQL'),
+('J28', 'SQL'),
+('J29', 'SQL'),
+('J4', 'SQL'),
+('J9', 'SQL'),
+('J11', 'Telecoms'),
+('J16', 'Telecoms'),
+('J24', 'Telecoms'),
+('J25', 'Telecoms'),
+('J27', 'Telecoms'),
+('J3', 'Telecoms'),
+('J30', 'Telecoms'),
+('J8', 'Telecoms');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `specialite`
+-- Structure de la table `specialite`
 --
 
 DROP TABLE IF EXISTS `specialite`;
@@ -298,10 +495,21 @@ CREATE TABLE IF NOT EXISTS `specialite` (
   PRIMARY KEY (`libelle_specialite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `specialite`
+--
+
+INSERT INTO `specialite` (`libelle_specialite`) VALUES
+('Charcuterie'),
+('JavaScript'),
+('PHP'),
+('SQL'),
+('Telecoms');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `statufier`
+-- Structure de la table `statufier`
 --
 
 DROP TABLE IF EXISTS `statufier`;
@@ -317,7 +525,7 @@ CREATE TABLE IF NOT EXISTS `statufier` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `travailler`
+-- Structure de la table `travailler`
 --
 
 DROP TABLE IF EXISTS `travailler`;
@@ -331,7 +539,7 @@ CREATE TABLE IF NOT EXISTS `travailler` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateur`
+-- Structure de la table `utilisateur`
 --
 
 DROP TABLE IF EXISTS `utilisateur`;
@@ -344,71 +552,71 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `conclure`
+-- Contraintes pour la table `conclure`
 --
 ALTER TABLE `conclure`
   ADD CONSTRAINT `Conclure_Formation0_FK` FOREIGN KEY (`ID_formation`) REFERENCES `formation` (`ID_formation`),
   ADD CONSTRAINT `Conclure_SessionExamen_FK` FOREIGN KEY (`ID_SessionExamen`) REFERENCES `sessionexamen` (`ID_SessionExamen`);
 
 --
--- Constraints for table `correspondre`
+-- Contraintes pour la table `correspondre`
 --
 ALTER TABLE `correspondre`
   ADD CONSTRAINT `correspondre_FormationPattern_FK` FOREIGN KEY (`ID_formationPattern`) REFERENCES `formationpattern` (`ID_formationPattern`),
   ADD CONSTRAINT `correspondre_Habilitation0_FK` FOREIGN KEY (`ID_Habilitation`) REFERENCES `habilitation` (`ID_Habilitation`);
 
 --
--- Constraints for table `detenir`
+-- Contraintes pour la table `detenir`
 --
 ALTER TABLE `detenir`
   ADD CONSTRAINT `Detenir_Habilitation_FK` FOREIGN KEY (`ID_Habilitation`) REFERENCES `habilitation` (`ID_Habilitation`),
   ADD CONSTRAINT `Detenir_Jure0_FK` FOREIGN KEY (`ID_Jure`) REFERENCES `jure` (`ID_Jure`);
 
 --
--- Constraints for table `entreprise`
+-- Contraintes pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
   ADD CONSTRAINT `Entreprise_Contact_FK` FOREIGN KEY (`ID_Contact`) REFERENCES `contact` (`ID_Contact`);
 
 --
--- Constraints for table `formateur`
+-- Contraintes pour la table `formateur`
 --
 ALTER TABLE `formateur`
   ADD CONSTRAINT `Formateur_Contact_FK` FOREIGN KEY (`ID_Contact`) REFERENCES `contact` (`ID_Contact`);
 
 --
--- Constraints for table `formation`
+-- Contraintes pour la table `formation`
 --
 ALTER TABLE `formation`
   ADD CONSTRAINT `Formation_Formateur_FK` FOREIGN KEY (`ID_formateur`) REFERENCES `formateur` (`ID_formateur`),
   ADD CONSTRAINT `Formation_FormationPattern0_FK` FOREIGN KEY (`ID_formationPattern`) REFERENCES `formationpattern` (`ID_formationPattern`);
 
 --
--- Constraints for table `jure`
+-- Contraintes pour la table `jure`
 --
 ALTER TABLE `jure`
   ADD CONSTRAINT `Jure_Contact_FK` FOREIGN KEY (`ID_Contact`) REFERENCES `contact` (`ID_Contact`);
 
 --
--- Constraints for table `specialiste`
+-- Contraintes pour la table `specialiste`
 --
 ALTER TABLE `specialiste`
   ADD CONSTRAINT `specialiste_Jure_FK` FOREIGN KEY (`ID_Jure`) REFERENCES `jure` (`ID_Jure`),
   ADD CONSTRAINT `specialiste_specialite0_FK` FOREIGN KEY (`libelle_specialite`) REFERENCES `specialite` (`libelle_specialite`);
 
 --
--- Constraints for table `statufier`
+-- Contraintes pour la table `statufier`
 --
 ALTER TABLE `statufier`
   ADD CONSTRAINT `Statufier_Jure_FK` FOREIGN KEY (`ID_Jure`) REFERENCES `jure` (`ID_Jure`),
   ADD CONSTRAINT `Statufier_SessionExamen0_FK` FOREIGN KEY (`ID_SessionExamen`) REFERENCES `sessionexamen` (`ID_SessionExamen`);
 
 --
--- Constraints for table `travailler`
+-- Contraintes pour la table `travailler`
 --
 ALTER TABLE `travailler`
   ADD CONSTRAINT `Travailler_Entreprise_FK` FOREIGN KEY (`ID_Entreprise`) REFERENCES `entreprise` (`ID_Entreprise`),

@@ -12,16 +12,17 @@
 
 <body>
 
-    <nav class="navbar fixed-top navbar-light bg-primary">
+    <nav class="navbar bg-primary">
         <form class="container-fluid justify-content-between">
-            <img class="col-1" src="../assets/fire.png" alt="logo ">
-            <button class="btn btn-info me-2 " type="button ">Gestion des modèles de formation</button>
-            <button class="btn btn-info me-2 " type="button ">Gestion des formations</button>
-            <button class="btn btn-info me-2 " type="button ">Gestion des formateurs</button>
-            <button class="btn btn-success me-2 " type="button ">Gestion des sessions d'examen</button>
-            <button class="btn btn-success me-2 " type="button ">Gestion des jurés</button>
+            <img class="col-1" src="../assets/img/logos/fire.png" alt="logo ">
+            <button class="btn btn-info me-2" type="button">Gestion des modèles de formation</button>
+            <button class="btn btn-info me-2" type="button">Gestion des formations</button>
+            <button class="btn btn-info me-2" type="button">Gestion des formateurs</button>
+            <button class="btn btn-success me-2" type="button">Gestion des sessions d'examen</button>
+            <button class="btn btn-success me-2" type="button">Gestion des jurés</button>
+            <button class="btn btn-success me-2" type="button">Import VALCES/CERES</button>
 
-            <div class="d-flex flex-column border p-1 rounded align-items-center">
+            <div class="d-flex flex-column border p-1 rounded">
                 <button class="btn btn-warning me-2 m-1" type="button ">Mon compte</button>
                 <button class="btn btn-danger me-2 " type="button ">Deconnexion</button>
             </div>
@@ -29,46 +30,45 @@
     </nav>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <!-- GESTION DES JURES -->
+    <div class="container-fluid p-4">
+        <table id="tableGestionJures" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Habilitation</th>
+                    <th scope="col">Spécialité</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Détail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mark</td>
+                    <td>truc</td>
+                    <td>machin</td>
+                    <td>@mdo</td>
+                    <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="../assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+                <tr>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>tretere</td>
+                    <td>@fat</td>
+                    <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="../assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>
 
-
+                </tr>
+                <tr>
+                    <td>Larry the Bird</td>
+                    <td>twitter</td>
+                    <td>Brouette</td>
+                    <td>@ici</td>
+                    <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="../assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>

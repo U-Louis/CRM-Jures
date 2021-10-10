@@ -3348,8 +3348,7 @@ fieldset:disabled .btn {
 .btn-warning:focus {
     color: #fff;
     background-color: #E82F3E;
-    border-color: #E82F3E
-    box-shadow: 0 0 0 .25rem rgba(226, 111, 38, .5)
+    border-color: #E82F3E box-shadow: 0 0 0 .25rem rgba(226, 111, 38, .5)
 }
 
 .btn-check:active+.btn-warning,
@@ -11682,7 +11681,7 @@ fieldset:disabled .btn {
 }
 
 .btn-primary {
-    background-image: linear-gradient(#50b3eb, #87CEFA 60%, #2c9ad9)
+    background-image: #87CEFA;
 }
 
 .btn-secondary {
@@ -11698,7 +11697,7 @@ fieldset:disabled .btn {
 }
 
 .btn-warning {
-    background-image: linear-gradient(linear-gradient(90deg, rgba(232,47,62,1) 29%, rgba(201,109,117,1) 50%, rgba(232,47,62,1) 71%))
+    background-image: linear-gradient(linear-gradient(90deg, rgba(232, 47, 62, 1) 29%, rgba(201, 109, 117, 1) 50%, rgba(232, 47, 62, 1) 71%))
 }
 
 .btn-danger {

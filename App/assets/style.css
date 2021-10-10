@@ -1,0 +1,15 @@
+.primay{
+    background-color: #87CEFA;
+}
+/* FORMULAIRE DE CONNECTION */
+.connectDiv{
+    min-height: 100vh;
+    background-color: #E5E5E5;
+}
+.connectForm{
+    min-height: 60vh;
+    background-color: #87CEFA;
+}
+.red{
+    background-color: red;
+}

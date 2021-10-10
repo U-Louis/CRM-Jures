@@ -3334,21 +3334,21 @@ fieldset:disabled .btn {
 
 .btn-warning {
     color: #fff;
-    background-color: #dd5600;
-    border-color: #dd5600
+    background-color: #E82F3E;
+    border-color: #E82F3E
 }
 
 .btn-warning:hover {
     color: #fff;
-    background-color: #bc4900;
-    border-color: #b14500
+    background-color: #E82F3E;
+    border-color: #E82F3E
 }
 
 .btn-check:focus+.btn-warning,
 .btn-warning:focus {
     color: #fff;
-    background-color: #bc4900;
-    border-color: #b14500;
+    background-color: #E82F3E;
+    border-color: #E82F3E
     box-shadow: 0 0 0 .25rem rgba(226, 111, 38, .5)
 }
 
@@ -3358,8 +3358,8 @@ fieldset:disabled .btn {
 .btn-warning:active,
 .show>.btn-warning.dropdown-toggle {
     color: #fff;
-    background-color: #b14500;
-    border-color: #a64100
+    background-color: #E82F3E;
+    border-color: #E82F3E
 }
 
 .btn-check:active+.btn-warning:focus,
@@ -3373,8 +3373,8 @@ fieldset:disabled .btn {
 .btn-warning.disabled,
 .btn-warning:disabled {
     color: #fff;
-    background-color: #dd5600;
-    border-color: #dd5600
+    background-color: #E82F3E;
+    border-color: #E82F3E
 }
 
 .btn-danger {
@@ -11698,7 +11698,7 @@ fieldset:disabled .btn {
 }
 
 .btn-warning {
-    background-image: linear-gradient(#e27129, #dd5600 60%, #d05100)
+    background-image: linear-gradient(linear-gradient(90deg, rgba(232,47,62,1) 29%, rgba(201,109,117,1) 50%, rgba(232,47,62,1) 71%))
 }
 
 .btn-danger {

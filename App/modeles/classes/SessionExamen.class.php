@@ -63,7 +63,7 @@
 
         protected function set_jures(){
             //check if juror is not busy on the same dates ?
-            //this check can be done with Habilitation::isDatesCompatible() refactored as a trait
+            //this check can be done with Habilitation::isDatesCompatible(period1start, period1end, period2start, period2end) refactored as a trait
             $this->jures = $jures;
         }
 

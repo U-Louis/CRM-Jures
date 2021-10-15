@@ -3,16 +3,16 @@
     Class Contact{
 
         //=================== INIT =========================
-        private $ID_contact;
-        private $Nom_contact;
-        private $tel_contact;
-        private $tel2_contact;
-        private $mail_contact;
-        private $numeroAdresse_contact;
-        private $libelleAdresse_contact;
-        private $complementAdresse_Contact;
-        private $VilleAdresse_contact;
-        private $codePostalAdresse_contact;
+        protected $ID_contact;
+        protected $Nom_contact;
+        protected $tel_contact;
+        protected $tel2_contact;
+        protected $mail_contact;
+        protected $numeroAdresse_contact;
+        protected $libelleAdresse_contact;
+        protected $complementAdresse_Contact;
+        protected $VilleAdresse_contact;
+        protected $codePostalAdresse_contact;
         
         //================= CONSTRUCTOR ====================
         public function __construct(
@@ -122,5 +122,22 @@
         }
 
         //================== METHODS =======================
+
+        /**
+         * Parent method for setting the children attributes, those are provided by an instance of a parent Contact object
+         */
+        protected function set_attributesFromContact(Contact $contactAttributes){
+            $this->ID_contact = $contactAttributes->get_ID_contact();
+            $this->Nom_contact = $contactAttributes->get_Nom_contact();
+            $this->tel_contact = $contactAttributes->get_tel_contact();
+            $this->tel2_contact = $contactAttributes->get_tel2_contact();
+            $this->mail_contact = $contactAttributes->get_mail_contact();
+            $this->numeroAdresse_contact = $contactAttributes->get_numeroAdresse_contact();
+            $this->libelleAdresse_contact = $contactAttributes->get_libelleAdresse_contact();
+            $this->complementAdresse_Contact = $contactAttributes->get_complementAdresse_Contact();
+            $this->VilleAdresse_contact = $contactAttributes->get_VilleAdresse_contact();
+            $this->codePostalAdresse_contact = $contactAttributes->get_codePostalAdresse_contact();
+        }
+
         //================== DISPLAY =======================
     }

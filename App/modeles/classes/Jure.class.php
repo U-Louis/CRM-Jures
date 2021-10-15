@@ -3,6 +3,7 @@
     Class Jure extends Contact{
 
         //=================== INIT =========================
+        private $contactAttributes;
         private $ID_jure;
         private $participations_sessions;
         private $habilitations;
@@ -11,35 +12,14 @@
 
         //================= CONSTRUCTOR ====================
         public function __construct(
-            string $ID_contact,
-            string $Nom_contact,
-            int $tel_contact,
-            int $tel2_contact,
-            string $mail_contact,
-            int $numeroAdresse_contact,
-            string $libelleAdresse_contact,
-            string $complementAdresse_Contact,
-            string $VilleAdresse_contact,
-            int $codePostalAdresse_contact,
-            //-----------end of inherited--------------------
+            object $contactAttributes,
             string $ID_jure,
             array $participations_sessions,
             array $habilitations,
             array $specialites,
             array $entreprisesEmployeurs
         ){
-            parent::__construct(
-                string $ID_contact,
-                string $Nom_contact,
-                int $tel_contact,
-                int $tel2_contact,
-                string $mail_contact,
-                int $numeroAdresse_contact,
-                string $libelleAdresse_contact,
-                string $complementAdresse_Contact,
-                string $VilleAdresse_contact,
-                int $codePostalAdresse_contact
-            );
+            $this->set_attributesFromContact($contactAttributes);
             $this->set_ID_jure();
             $this->set_participations_sessions();
             $this->set_habilitations();
@@ -97,6 +77,10 @@
          * @return bool
          */
         protected function isHab(SessionExamen $sessionExamenToCheck) : bool{
+                //foreach in $this->habilitations
+                    //if Habilitation->libelle_habilitation === $sessionExamenToCheck->neededHabilitations
+                        //if Habilitation->isDatesCompatible($sessionExamToCheck)
+                    //return TRUE
         }
 
         /**

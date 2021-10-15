@@ -3,13 +3,18 @@
     Class FormationPattern {
 
         //=================== INIT =========================
-        private $ID_formationPattern;
-        private $libelle_formationPattern;
-        private $description_formation;
-        private $neededHabilitations;
+        protected $ID_formationPattern;
+        protected $libelle_formationPattern;
+        protected $description_formation;
+        protected $neededHabilitations;
 
         //================= CONSTRUCTOR ====================
-        public function __construct(string $ID_formationPattern, string $libelle_formationPattern, string $description_formation, array $neededHabilitations){
+        public function __construct(
+            string $ID_formationPattern,
+            string $libelle_formationPattern,
+            string $description_formation,
+            array $neededHabilitations
+        ){
             $this->set_ID_formationPattern();
             $this->set_libelle_formationPattern();
             $this->set_description_formation();

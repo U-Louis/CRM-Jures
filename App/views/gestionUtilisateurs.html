@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
 
-    <title>CRM jurés</title>
+    <title>Gestion des utilisateurs</title>
 </head>
 
 <body>
@@ -31,44 +31,45 @@
     </nav>
 
 
-    <!-- GESTION DES JURES -->
+    <!-- GESTION DES USERS -->
     <div class="container-fluid p-4">
-        <table id="tableGestionJures" class="table table-striped">
+        <h2>Gestion des utilisateurs</h2>
+        <table id="tableGestionUtilisateurs" class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col">Habilitation</th>
-                    <th scope="col">Spécialité</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Détail</th>
+                    <th scope="col">Statut</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Mark</td>
-                    <td>truc</td>
-                    <td>machin</td>
-                    <td>@mdo</td>
-                    <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="../assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>
-
+                    <td>Formateur</td>
+                    <td><a href="#" class="btn btn-info">Modifier</a></td>
+                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a></td>
+                    <td><a href="#" class="btn btn-primary">Régénérer le mot de passe</a></td>
                 </tr>
                 <tr>
                     <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>tretere</td>
-                    <td>@fat</td>
-                    <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="../assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>
-
+                    <td>Formateur</td>
+                    <td><a href="#" class="btn btn-info">Modifier</a></td>
+                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a></td>
+                    <td><a href="#" class="btn btn-primary">Régénérer le mot de passe</a></td>
                 </tr>
                 <tr>
                     <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Brouette</td>
-                    <td>@ici</td>
-                    <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="../assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>
-                </tr>
+                    <td>Formateur</td>
+                    <td><a href="#" class="btn btn-info">Modifier</a></td>
+                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a></td>
+                    <td><a href="#" class="btn btn-primary">Régénérer le mot de passe</a></td>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td colspan="2"><a href="#" class="btn btn-success">Ajouter</a></td>
+                    </tr>
             </tbody>
         </table>
+
     </div>
 
 

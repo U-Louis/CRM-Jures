@@ -11,17 +11,20 @@
         echo "CONNEXION REUSSIE" . RC;
 
         // read_ByParam
-        // $test2=Crud::read_byParam("contact", "ID_Contact");
+        $test2=Crud::read_byParam("contact", "ID_Contact");
 
         // create
-        // echo $test3=Crud::create("habilitation", array("ID_Habilitation"," Libelle_Habilitation"," DebutValidite_Habilitation"," FinValidite_Habilitation"," VisibleVALCES"," VisibleCERES"," EnAttenteValidation"),array("'h30'","'Web'","'1993-11-24'","'2003-11-24'",1,1,0));
+         echo $test3=Crud::create("habilitation", array("ID_Habilitation"," Libelle_Habilitation"," DebutValidite_Habilitation"),array("'h30'","'Web'","'1993-11-24'","'2003-11-24'",1,1,0));
 
         // update
-        // echo $test4=Crud::update("habilitation",array("Libelle_Habilitation = 'Web'","DebutValidite_Habilitation='2009-10-30'"), "ID_Habilitation = 'h30'");
+         echo $test4=Crud::update("habilitation",array("Libelle_Habilitation = 'Web'","DebutValidite_Habilitation='2009-10-30'"), "ID_Habilitation = 'h30'");
 
         // delete
-        // echo $test5=Crud::delete("habilitation",array("ID_Habilitation='h30'"));
+         echo $test5=Crud::delete("habilitation",array("ID_Habilitation='h30'"));
         
+        $test= Crud::read_all("jure");
+        print_r($test.RC);
+
     } catch (PDOException $e) {
         echo $e->getMessage() . RC;
         echo "ECHEC de CONNEXION à la BDD" . RC;
@@ -33,7 +36,7 @@
 
     // read_All
     try{
-        $test= Crud::read_all("patate");
+        $test= Crud::read_all("jure");
         print_r($test.RC);
 
     } catch(CrudException $e) {

@@ -9,7 +9,7 @@
         //================= CONSTRUCTOR ====================
         public function __construct(string $ID_contact, object $contactAttributes){
             $this->set_attributesFromContact($contactAttributes);
-            $this->set_ID_entreprise();
+            $this->set_ID_entreprise($ID_contact);
         }
 
         //================== SETTERS =======================        

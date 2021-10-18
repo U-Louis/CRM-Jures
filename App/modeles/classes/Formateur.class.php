@@ -10,7 +10,7 @@
         public function __construct(object $contactAttributes, string $ID_formateur
         ){
             $this->set_attributesFromContact($contactAttributes);
-            $this->set_ID_formateur();
+            $this->set_ID_formateur(string $ID_formateur);
         }
 
         //================== SETTERS =======================

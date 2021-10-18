@@ -11,10 +11,10 @@
         //================= CONSTRUCTOR ====================
         public function __construct(string $ID_habilitation, string $libelle_habilitation, string $debut_habilitation, string $fin_habilitation)
         {
-            $this->set_ID_habilitation();
-            $this->set_libelle_habilitation();
-            $this->set_debut_habilitation();
-            $this->set_fin_habilitation();
+            $this->set_ID_habilitation($ID_habilitation);
+            $this->set_libelle_habilitation($libelle_habilitation);
+            $this->set_debut_habilitation($debut_habilitation);
+            $this->set_fin_habilitation($fin_habilitation);
         }
 
         //================== SETTERS =======================

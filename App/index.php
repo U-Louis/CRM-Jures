@@ -1,19 +1,20 @@
 <?php
-    $host = 'localhost';
-    $port = 3306;
-    $bdd = 'crm_jures';
-    $user = 'root';
-    $password = '';
+    require_once('../modeles/Connector.class.php');
 
-    $dsn = "mysql:host=".$host."; port=".$port."; dbname=".$bdd."; charset=utf8";
+    const RC = "<br />\n";
+
     try {
-        // Etape 1 - Créer une connexion BDD
-        $mysqlPDO = new PDO($dsn, $user, $password,
-                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        echo "CONNEXION réussie"; 
-        var_dump($mysqlPDO);                       
-    } catch(PDOException $e) { 
-        // en cas erreur on affiche un message et on arrete tout
-        die('<h1>Erreur de connexion : </h1>' . $e->getMessage());
+        // create connexion
+        $connexion = Connector::getConnexion();
+//var_dump($connexion);
+        echo "CONNEXION REUSSIE" . RC;
+    } catch (PDOException $e) {
+        echo $e->getMessage() . RC;
+        echo "ECHEC de CONNEXION à la BDD" . RC;
+    } catch (Exception $e) {
+        echo $e->getMessage() . RC;
     }
+
+    echo RC . "LE PROGRAMME CONTINUE ..." . RC;
+    
 ?>

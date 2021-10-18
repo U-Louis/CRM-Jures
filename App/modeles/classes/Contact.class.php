@@ -27,16 +27,16 @@
             string $VilleAdresse_contact,
             int $codePostalAdresse_contact
         ){
-            $this->set_ID_contact();
-            $this->set_Nom_contact();
-            $this->set_tel_contact();
-            $this->set_tel2_contact();
-            $this->set_mail_contact();
-            $this->set_numeroAdresse_contact();
-            $this->set_libelleAdresse_contact();
-            $this->set_complementAdresse_Contact();
-            $this->set_VilleAdresse_contact();
-            $this->set_codePostalAdresse_contact();
+            $this->set_ID_contact($ID_contact);
+            $this->set_Nom_contact($Nom_contact);
+            $this->set_tel_contact($tel_contact);
+            $this->set_tel2_contact($tel2_contact);
+            $this->set_mail_contact($mail_contact);
+            $this->set_numeroAdresse_contact($numeroAdresse_contact);
+            $this->set_libelleAdresse_contact($libelleAdresse_contact);
+            $this->set_complementAdresse_Contact($complementAdresse_Contact);
+            $this->set_VilleAdresse_contact($VilleAdresse_contact);
+            $this->set_codePostalAdresse_contact($codePostalAdresse_contact);
         }
 
         //================== SETTERS =======================

@@ -21,13 +21,13 @@
             object $formateur,
             array $sessionsExamens
         ){
-            $this->set_attributesFromPattern();
-            $this->set_ID_formation();
-            $this->set_libelle_formation();
-            $this->set_debutFormation();
-            $this->set_finFormation();
-            $this->set_formateur();
-            $this->set_sessionsExamens();
+            $this->set_attributesFromPattern($FormationPattern);
+            $this->set_ID_formation($ID_formation);
+            $this->set_libelle_formation($libelle_formation);
+            $this->set_debutFormation($date_debutFormation);
+            $this->set_finFormation($date_finFormation);
+            $this->set_formateur($formateur);
+            $this->set_sessionsExamens($sessionsExamens);
         }
 
         //================== SETTERS =======================

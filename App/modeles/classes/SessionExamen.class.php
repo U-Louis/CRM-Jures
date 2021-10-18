@@ -20,13 +20,13 @@
             string $date_FinSession,
             array $jures
         ){
-            $this->set_attributesFromFormation();
-            parent::set_attributesFromPattern();
-            $this->set_ID_sessionExamen();
-            $this->set_libelle_sessionExamen();
-            $this->set_debutSessionExamen();
-            $this->set_finSessionExamen();
-            $this->set_jures();
+            $this->set_attributesFromFormation($formation);
+            parent::set_attributesFromPattern($this->formationPattern);
+            $this->set_ID_sessionExamen($ID_sessionExamenPattern);
+            $this->set_libelle_sessionExamen($libelle_formation);
+            $this->set_debutSessionExamen($date_debutSession);
+            $this->set_finSessionExamen($date_FinSession);
+            $this->set_jures($jures);
         }
 
         //================== SETTERS =======================

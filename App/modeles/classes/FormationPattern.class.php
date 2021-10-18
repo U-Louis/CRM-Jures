@@ -15,10 +15,10 @@
             string $description_formation,
             array $neededHabilitations
         ){
-            $this->set_ID_formationPattern();
-            $this->set_libelle_formationPattern();
-            $this->set_description_formation();
-            $this->set_neededHabilitations();
+            $this->set_ID_formationPattern($ID_formationPattern);
+            $this->set_libelle_formationPattern($libelle_formationPattern);
+            $this->set_description_formation($description_formation);
+            $this->set_neededHabilitations($neededHabilitations);
         }
 
         //================== SETTERS =======================

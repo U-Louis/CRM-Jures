@@ -20,11 +20,11 @@
             array $entreprisesEmployeurs
         ){
             $this->set_attributesFromContact($contactAttributes);
-            $this->set_ID_jure();
-            $this->set_participations_sessions();
-            $this->set_habilitations();
-            $this->set_specialites();
-            $this->set_entreprisesEmployeurs();        
+            $this->set_ID_jure($ID_jure);
+            $this->set_participations_sessions($participations_sessions);
+            $this->set_habilitations($habilitations);
+            $this->set_specialites($specialites);
+            $this->set_entreprisesEmployeurs($entreprisesEmployeurs);        
         }
 
         //================== SETTERS =======================

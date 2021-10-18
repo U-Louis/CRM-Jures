@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+
+    <title>Gestion formations</title>
+</head>
+
+<body>
+
+    <nav class="navbar bg-primary">
+        <form class="container-fluid justify-content-between">
+            <img class="col-1" src="../assets/img/logos/fire.png" alt="logo ">
+            <button class="btn btn-info me-2" type="button">Gestion des modèles de formation</button>
+            <button class="btn btn-info me-2" type="button">Gestion des formations</button>
+            <button class="btn btn-info me-2" type="button">Gestion des formateurs</button>
+            <button class="btn btn-success me-2" type="button">Gestion des sessions d'examen</button>
+            <button class="btn btn-success me-2" type="button">Gestion des jurés</button>
+            <button class="btn btn-success me-2" type="button" disabled>Import VALCES/CERES</button>
+
+            <div class="d-flex flex-column border p-1 rounded">
+                <button class="btn btn-warning me-2 m-1" type="button ">Mon compte</button>
+                <button class="btn btn-danger me-2 " type="button ">Deconnexion</button>
+            </div>
+        </form>
+
+    </nav>
+
+
+    <!-- GESTION DES FORMATIONS -->
+    <div class="container p-4">
+        <table id="tableGestionFormations" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Libellé</th>
+                    <th scope="col">date de début</th>
+                    <th scope="col">Date de fin</th>
+                    <th scope="col">Formateur</th>
+                    <th scope="col">Modèle de formation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mark</td>
+                    <td>06/12/24</td>
+                    <td>07/12/24</td>
+                    <td>Fernand Format'Heure</td>
+                    <td>DWWM</td>
+                    <td>
+                        <a href="#" class="btn btn-info">Modifier</a>
+                        <a href="#" class="btn btn-outline-danger">Supprimer</a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Mark</td>
+                    <td>06/12/24</td>
+                    <td>07/12/24</td>
+                    <td>Fernand Format'Heure</td>
+                    <td>DWWM</td>
+                    <td>
+                        <a href="#" class="btn btn-info">Modifier</a>
+                        <a href="#" class="btn btn-outline-danger">Supprimer</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mark</td>
+                    <td>06/12/24</td>
+                    <td>07/12/24</td>
+                    <td>Fernand Format'Heure</td>
+                    <td>DWWM</td>
+                    <td>
+                        <a href="#" class="btn btn-info">Modifier</a>
+                        <a href="#" class="btn btn-outline-danger">Supprimer</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-success">Ajouter</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</html>

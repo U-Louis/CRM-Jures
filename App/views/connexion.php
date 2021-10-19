@@ -19,4 +19,4 @@
     </div>
 </div>
 
-<script src="../assets/script/connexion.js"></script>
+<script src="assets/script/connexion.js"></script>

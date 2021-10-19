@@ -28,23 +28,23 @@
         }
 
         //================== SETTERS =======================
-        protected function set_ID_jure(){
+        protected function set_ID_jure($ID_jure){
             $this->ID_jure = $ID_jure;
         }
 
-        protected function set_participations_sessions(){
+        protected function set_participations_sessions($participations_sessions){
             $this->participations_sessions = $participations_sessions;
         }
 
-        protected function set_habilitations(){
+        protected function set_habilitations($habilitations){
             $this->habilitations = $habilitations;
         }
 
-        protected function set_specialites(){
+        protected function set_specialites($specialites){
             $this->specialites = $specialites;
         }
 
-        protected function set_entreprisesEmployeurs(){
+        protected function set_entreprisesEmployeurs($entreprisesEmployeurs){
             $this->entreprisesEmployeurs = $entreprisesEmployeurs;
         }
 

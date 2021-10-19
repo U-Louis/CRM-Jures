@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 19 oct. 2021 à 12:34
+-- Généré le : mar. 19 oct. 2021 à 14:30
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -253,10 +253,9 @@ CREATE TABLE IF NOT EXISTS `formation` (
   `Date_DebutFormation` date DEFAULT NULL,
   `Date_FinFormation` date DEFAULT NULL,
   `ID_formateur` char(5) NOT NULL,
-  `ID_formationPattern` char(5) NOT NULL,
+  `ID_formationPattern` int(5) NOT NULL,
   PRIMARY KEY (`ID_formation`),
-  KEY `Formation_Formateur_FK` (`ID_formateur`),
-  KEY `Formation_FormationPattern0_FK` (`ID_formationPattern`)
+  KEY `Formation_Formateur_FK` (`ID_formateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -264,10 +263,10 @@ CREATE TABLE IF NOT EXISTS `formation` (
 --
 
 INSERT INTO `formation` (`ID_formation`, `Libelle_Formation`, `Date_DebutFormation`, `Date_FinFormation`, `ID_formateur`, `ID_formationPattern`) VALUES
-('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 'FOR01', 'DWWM'),
-('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 'FOR03', 'DWWM'),
-('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 'FOR02', 'RZO'),
-('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 'FOR04', 'RZO');
+('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 'FOR01', 1),
+('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 'FOR03', 1),
+('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 'FOR02', 2),
+('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 'FOR04', 2);
 
 -- --------------------------------------------------------
 
@@ -277,19 +276,20 @@ INSERT INTO `formation` (`ID_formation`, `Libelle_Formation`, `Date_DebutFormati
 
 DROP TABLE IF EXISTS `formationpattern`;
 CREATE TABLE IF NOT EXISTS `formationpattern` (
-  `ID_formationPattern` char(5) NOT NULL,
+  `ID_formationPattern` int(5) NOT NULL AUTO_INCREMENT,
   `Libelle_formationPatern` char(255) NOT NULL,
   `Descriptif_formation` char(255) DEFAULT NULL,
   PRIMARY KEY (`ID_formationPattern`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `formationpattern`
 --
 
 INSERT INTO `formationpattern` (`ID_formationPattern`, `Libelle_formationPatern`, `Descriptif_formation`) VALUES
-('DWWM', 'dev web & web mobile', 'On apprend plein de trucs supers'),
-('RZO', 'Formation réseau', 'On apprend plein de choses pour faire des rézos');
+(1, 'dev web & web mobile', 'On apprend plein de trucs supers'),
+(2, 'Formation réseau', 'On apprend plein de choses pour faire des rézos'),
+(3, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -568,8 +568,7 @@ ALTER TABLE `formateur`
 -- Contraintes pour la table `formation`
 --
 ALTER TABLE `formation`
-  ADD CONSTRAINT `Formation_Formateur_FK` FOREIGN KEY (`ID_formateur`) REFERENCES `formateur` (`ID_formateur`),
-  ADD CONSTRAINT `Formation_FormationPattern0_FK` FOREIGN KEY (`ID_formationPattern`) REFERENCES `formationpattern` (`ID_formationPattern`);
+  ADD CONSTRAINT `Formation_Formateur_FK` FOREIGN KEY (`ID_formateur`) REFERENCES `formateur` (`ID_formateur`);
 
 --
 -- Contraintes pour la table `jure`

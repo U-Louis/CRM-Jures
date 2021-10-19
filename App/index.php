@@ -52,7 +52,7 @@ echo "GET : "; var_dump($_GET);
 echo "POST : "; var_dump($_POST);
 
     //INIT
-    $route = 'home';
+    $route = 'gestionFormationPattern';
 
     if (isset($_GET['route'])) {
         $route = $_GET['route'];
@@ -98,6 +98,9 @@ echo "POST : "; var_dump($_POST);
         break;
 
         case 'gestionFormationPattern':
+            if((isset($_POST['libelle']) || isset($_POST['descriptif']))){
+                mgr_formationPattern::create();
+            }
             require('views/header.php');
             require('views/gestionFormationPattern.php');
             require('views/footer.php');

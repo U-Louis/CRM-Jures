@@ -12,7 +12,6 @@
                 <?php
                 $tempInstance = new mgr_formationPattern();
                 $list = $tempInstance->read_all('formationpattern');
-                var_dump($list);
                 foreach($list as $item){
                     echo '<tr>' .
                     '<td>' . $item['Libelle_formationPatern'] . '</td>'.
@@ -23,10 +22,13 @@
                 }
                 ?>
                 <tr>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td colspan="2">
-                        <a href="#" class="btn btn-success">Ajouter</a></td>
+                    <form method="POST">
+                        <td><input type="text" name="libelle"></td>
+                        <td><input type="text" name="descriptif"></td>
+                        <td colspan="2">
+                            <input type="submit" class="btn btn-success" value="Ajouter">
+                        </td>
+                    </form>
                 </tr>
             </tbody>
         </table>

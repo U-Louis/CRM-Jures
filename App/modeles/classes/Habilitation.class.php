@@ -18,19 +18,19 @@
         }
 
         //================== SETTERS =======================
-        protected function set_ID_habilitation(){
+        protected function set_ID_habilitation($ID_habilitation){
             $this->ID_habilitation = $ID_habilitation;
         }
 
-        protected function set_libelle_habilitation(){
+        protected function set_libelle_habilitation($libelle_habilitation){
             $this->libelle_habilitation = $libelle_habilitation;
         }
 
-        protected function set_debut_habilitation(){
+        protected function set_debut_habilitation($debut_habilitation){
             $this->debut_habilitation = $debut_habilitation;
         }
 
-        protected function set_fin_habilitation(){
+        protected function set_fin_habilitation($fin_habilitation){
             $this->fin_habilitation = $fin_habilitation;
         }
 

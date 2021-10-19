@@ -34,34 +34,34 @@
         /**
          * Inherited attributes set with an instance of a parent object
          */
-        private function set_attributesFromFormation(){
+        private function set_attributesFromFormation($formation){
             $this->formationPattern = $formation->get_attributesFromPattern(); //with instance of grandparent object
             $this->ID_formation = $formation->get_ID_formation();
-            $this->$libelle_formation = $formation->get_libelle_formation();
-            $this->$date_debutFormation = $formation->get_date_debutFormation();
-            $this->$date_finFormation = $formation->get_date_finFormation();
-            $this->$formateur = $formation->get_formateur();
+            $this->libelle_formation = $formation->get_libelle_formation();
+            $this->date_debutFormation = $formation->get_date_debutFormation();
+            $this->date_finFormation = $formation->get_date_finFormation();
+            $this->formateur = $formation->get_formateur();
         }
 
-        protected function set_ID_sessionExamen(){
+        protected function set_ID_sessionExamen($ID_sessionExamen){
             $this->ID_sessionExamen = $ID_sessionExamen;
         }
 
-        protected function set_libelle_sessionExamen(){
+        protected function set_libelle_sessionExamen($libelle_formation){
             $this->libelle_formation = $libelle_formation;
         }
 
-        protected function set_debutSessionExamen(){
+        protected function set_debutSessionExamen($date_debutSession){
             //check format date
             //check if after today
             $this->date_debutSession = $date_debutSession;
         }
 
-        protected function set_libelle_sessionExamen(){
-            $this->libelle_formation = $libelle_formation;
+        protected function set_finSessionExamen($date_FinSession){
+            $this->date_FinSession = $date_FinSession;
         }
 
-        protected function set_jures(){
+        protected function set_jures($jures){
             //check if juror is not busy on the same dates ?
             //this check can be done with Habilitation::isDatesCompatible(period1start, period1end, period2start, period2end) refactored as a trait
             $this->jures = $jures;

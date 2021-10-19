@@ -7,19 +7,18 @@
         private $ID_formateur;
 
         //================= CONSTRUCTOR ====================
-        public function __construct(object $contactAttributes, string $ID_formateur
-        ){
+        public function __construct(string $ID_formateur, object $contactAttributes){
             $this->set_attributesFromContact($contactAttributes);
-            $this->set_ID_formateur(string $ID_formateur);
+            $this->set_ID_formateur($ID_formateur);
         }
 
         //================== SETTERS =======================
-        protected function set_ID_formateur();{
+        protected function set_ID_formateur($ID_formateur){
             $this->ID_formateur = $ID_formateur;
         }
 
         //================== GETTERS =======================
-        protected function get_ID_formateur();{
+        protected function get_ID_formateur(){
             return $this->ID_formateur;
         }
 

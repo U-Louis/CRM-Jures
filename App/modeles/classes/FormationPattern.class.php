@@ -22,19 +22,19 @@
         }
 
         //================== SETTERS =======================
-        protected function set_ID_formationPattern(){
+        protected function set_ID_formationPattern($ID_formationPattern){
             $this->ID_formationPattern = $ID_formationPattern;
         }
 
-        protected function set_libelle_formationPattern(){
+        protected function set_libelle_formationPattern($libelle_formationPattern){
             $this->libelle_formationPattern = $libelle_formationPattern;
         }
 
-        protected function set_description_formation(){
+        protected function set_description_formation($description_formation){
             $this->description_formation = $description_formation;
         }
 
-        protected function set_neededHabilitations(){
+        protected function set_neededHabilitations($neededHabilitations){
             $this->neededHabilitations = $neededHabilitations;
         }
 
@@ -51,11 +51,7 @@
             return $this->description_formation;
         }
 
-        protected function set_neededHabilitations(){
-            $this->neededHabilitations = $neededHabilitations;
-        }
-
-        protected function set_neededHabilitations(){
+        protected function get_neededHabilitations(){
             return $this->neededHabilitations;
         }
 

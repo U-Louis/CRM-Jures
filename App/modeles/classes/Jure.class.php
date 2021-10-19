@@ -28,44 +28,44 @@
         }
 
         //================== SETTERS =======================
-        protected function set_ID_jure();{
+        protected function set_ID_jure(){
             $this->ID_jure = $ID_jure;
         }
 
-        protected function set_participations_sessions();{
+        protected function set_participations_sessions(){
             $this->participations_sessions = $participations_sessions;
         }
 
-        protected function set_habilitations();{
+        protected function set_habilitations(){
             $this->habilitations = $habilitations;
         }
 
-        protected function set_specialites();{
+        protected function set_specialites(){
             $this->specialites = $specialites;
         }
 
-        protected function set_entreprisesEmployeurs();   {
+        protected function set_entreprisesEmployeurs(){
             $this->entreprisesEmployeurs = $entreprisesEmployeurs;
         }
 
         //================== GETTERS =======================
-        protected function get_ID_jure();{
+        protected function get_ID_jure(){
             return $this->ID_jure;
         }
 
-        protected function get_participations_sessions();{
+        protected function get_participations_sessions(){
             return $this->participations_sessions;
         }
 
-        protected function get_habilitations();{
+        protected function get_habilitations(){
             return $this->habilitations;
         }
 
-        protected function get_specialites();{
+        protected function get_specialites(){
             return $this->specialites;
         }
 
-        protected function get_entreprisesEmployeurs();   {
+        protected function get_entreprisesEmployeurs(){
             return $this->entreprisesEmployeurs;
         }
 

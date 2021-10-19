@@ -35,38 +35,38 @@
         /**
          * Inherited attributes set with an instance of a parent object
          */
-        protected function set_attributesFromPattern(){
+        protected function set_attributesFromPattern($FormationPattern){
             $this->ID_formationPattern = $FormationPattern->get_ID_formationPattern();
             $this->libelle_formationPattern = $FormationPattern->get_libelle_formationPattern();
             $this->description_formation = $FormationPattern->get_description_formation();
             $this->neededHabilitations = $FormationPattern->get_neededHabilitations();
         }
         
-        protected function set_ID_formation(){
+        protected function set_ID_formation($ID_formation){
             $this->ID_formation = $ID_formation;
         }
 
-        protected function set_libelle_formation(){
+        protected function set_libelle_formation($libelle_formation){
             $this->libelle_formation = $libelle_formation;
         }
 
-        protected function set_debutFormation(){
+        protected function set_debutFormation($date_debutFormation){
             //check format date
             //check if after today
             $this->date_debutFormation = $date_debutFormation;
         }
 
-        protected function set_finFormation(){
+        protected function set_finFormation($date_finFormation){
             //check format date
             //check if after debut
             $this->date_finFormation = $date_finFormation;
         }
 
-        protected function set_formateur(){
+        protected function set_formateur($formateur){
             $this->formateur = $formateur;
         }
 
-        protected function set_sessionsExamens(){
+        protected function set_sessionsExamens($sessionsExamens){
             $this->sessionsExamens = $sessionsExamens;
         }
 

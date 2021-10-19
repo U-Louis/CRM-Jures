@@ -63,7 +63,7 @@ echo "POST : "; var_dump($_POST);
     switch ($route){
         case 'home':
             require('views/header.php');
-            require('views/gestionUtilisateurs.php');
+            require('views/gestionFormationPattern.php');
             require('views/footer.php');
         break;
 

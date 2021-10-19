@@ -3,6 +3,14 @@
         include  $classe . ".class.php";
         });
 
+ $r = new mgr_formationPattern();
+$r->read_all('formationpattern', 'FormationPattern'); 
 
-$r = new Habilitation('id_habi', 'libe_habi','debut', 'fin');
-var_dump($r);
+/*   $t= new Connector();
+$t->connect();  */
+ 
+
+ /*  $file = 'C:\wamp64\www\CRM-Jures\App\params.ini';
+$params = parse_ini_file($file,true);
+extract($params['connexion']);
+var_dump($params);    */

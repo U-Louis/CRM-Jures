@@ -13,12 +13,11 @@
         /**
          * Connects to the BDD set in the params.ini
          */
-        private static function connect() {
-            $file = 'params.ini';
+        public static function connect() {
+            $file = 'C:\wamp64\www\CRM-Jures\App\params.ini';
             if (file_exists($file)) {
                 $params = parse_ini_file($file,true);
-var_dump($params);            
-                extract($params);
+                extract($params['connexion']);
                 $dsn = "mysql:host=".$host."; port=".$port."; dbname=".$bdd."; charset=utf8";                
                 $mysqlPDO = new PDO($dsn, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                 Connector::$connexion = $mysqlPDO;                

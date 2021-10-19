@@ -1,6 +1,8 @@
 <!-- GESTION DES JURES -->
-    <div class="container-fluid p-4">
+<div class="container-fluid p-4">
         <h2>Gestion des jurés</h2>
+        <input type="text" name="search-bar" placeholder="Tapez ici...">
+        <input type="button" id="search-button" value="Rechercher">
         <table id="tableGestionJures" class="table table-striped">
             <thead>
                 <tr>
@@ -13,8 +15,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Mark</td>
-                    <td>truc</td>
+                    <td><?php print_r(JureMgr::read_all_jureName(PDO::FETCH_CLASS)) ?></td>
+                    <td><?php print_r(JureMgr::read_all_jureHabilitation(PDO::FETCH_CLASS)) ?></td>
                     <td>machin</td>
                     <td>@mdo</td>
                     <td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td>

@@ -76,12 +76,12 @@
          * @param SessionExamen
          * @return bool
          */
-        protected function isHab(SessionExamen $sessionExamenToCheck) : bool{
-                //foreach in $this->habilitations
-                    //if Habilitation->libelle_habilitation === $sessionExamenToCheck->neededHabilitations
-                        //if Habilitation->isDatesCompatible($sessionExamToCheck)
-                    //return TRUE
-        }
+        // protected function isHab(SessionExamen $sessionExamenToCheck) : bool{
+        //         //foreach in $this->habilitations
+        //             //if Habilitation->libelle_habilitation === $sessionExamenToCheck->neededHabilitations
+        //                 //if Habilitation->isDatesCompatible($sessionExamToCheck)
+        //             //return TRUE
+        // }
 
         /**
          * Check if the juror has another session planned on the same date

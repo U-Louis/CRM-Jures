@@ -19,7 +19,13 @@
             <input class="btn btn-info me-2" type="input">Gestion des formations</button>
             <input class="btn btn-info me-2" type="input">Gestion des formateurs</button>
             <input class="btn btn-success me-2" type="input">Gestion des sessions d'examen</button>
-            <input class="btn btn-success me-2" type="input">Gestion des jurés</button>
+
+        <form class="container-fluid justify-content-between" method="$_GET" action="<?php echo $_SERVER["PHP_SELF"]?>">
+            <input type="hidden" name="route" value="gestionJures">
+            <button class="btn btn-success me-2" type="submit">Gestion des jurés</button>
+
+        </form>
+
             <div class="d-flex flex-column border p-1 rounded">
                 <input class="btn btn-warning me-2 m-1" type="button ">Mon compte</button>
                 <input class="btn btn-danger me-2 " type="button ">Deconnexion</button>

@@ -62,9 +62,9 @@ echo "POST : "; var_dump($_POST);
     //Routing
     switch ($action){
         case 'home':
-            require('App/views/header.php');
-            require('App/views/home.php');
-            require('App/views/footer.php');
+            require('views/header.php');
+            require('views/gestionUtilisateurs.php');
+            require('views/footer.php');
     }
 
 

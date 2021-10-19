@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 18 oct. 2021 à 14:33
+-- Généré le : mar. 19 oct. 2021 à 12:34
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -140,20 +140,6 @@ INSERT INTO `contact` (`ID_Contact`, `Nom_contact`, `Prenom_contact`, `Tel_conta
 ('E04', 'Linkedune', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('E05', 'Facebrique', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('JARDI', 'Jardylalaland', '', 2757575, 0, 'ca.existe.pas@newyork.times.co', 6, 'Rue du jardin', '', 'Caen', 14000);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `correspondre`
---
-
-DROP TABLE IF EXISTS `correspondre`;
-CREATE TABLE IF NOT EXISTS `correspondre` (
-  `ID_formationPattern` char(5) NOT NULL,
-  `ID_Habilitation` char(5) NOT NULL,
-  PRIMARY KEY (`ID_formationPattern`,`ID_Habilitation`),
-  KEY `correspondre_Habilitation0_FK` (`ID_Habilitation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -558,13 +544,6 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 ALTER TABLE `conclure`
   ADD CONSTRAINT `Conclure_Formation0_FK` FOREIGN KEY (`ID_formation`) REFERENCES `formation` (`ID_formation`),
   ADD CONSTRAINT `Conclure_SessionExamen_FK` FOREIGN KEY (`ID_SessionExamen`) REFERENCES `sessionexamen` (`ID_SessionExamen`);
-
---
--- Contraintes pour la table `correspondre`
---
-ALTER TABLE `correspondre`
-  ADD CONSTRAINT `correspondre_FormationPattern_FK` FOREIGN KEY (`ID_formationPattern`) REFERENCES `formationpattern` (`ID_formationPattern`),
-  ADD CONSTRAINT `correspondre_Habilitation0_FK` FOREIGN KEY (`ID_Habilitation`) REFERENCES `habilitation` (`ID_Habilitation`);
 
 --
 -- Contraintes pour la table `detenir`

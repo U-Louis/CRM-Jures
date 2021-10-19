@@ -1,5 +1,5 @@
 <?php
-    require_once('modeles/classes/Connector.class.php');
+/*     require_once('modeles/classes/Connector.class.php');
     require_once('modeles/classes/Crud.class.php');
 
     const RC = "<br />\n";
@@ -41,6 +41,32 @@
 
     } catch(CrudException $e) {
         echo $e->getMessage().RC;
+    } ================================================================================================================================
+    ================================================================================================================================*/
+
+    spl_autoload_register(function($classe){
+        include "modeles/classes/" . $classe . ".class.php";
+        });
+
+echo "GET : "; var_dump($_GET);
+echo "POST : "; var_dump($_POST);
+
+    //INIT
+    $action = 'home';
+
+    if (isset($_GET['action'])) {
+        $action = $_GET['action'];
     }
+
+
+    //Routing
+    switch ($action){
+        case 'home':
+            require('App/views/header.php');
+            require('App/views/home.php');
+            require('App/views/footer.php');
+    }
+
+
     
 ?>

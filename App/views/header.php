@@ -20,16 +20,10 @@
             <button class="btn btn-info me-2" type="button">Gestion des formateurs</button>
             <button class="btn btn-success me-2" type="button">Gestion des sessions d'examen</button>
             <button class="btn btn-success me-2" type="button">Gestion des jurés</button>
-            <button class="btn btn-success me-2" type="button" disabled>Import VALCES/CERES</button>
 
             <div class="d-flex flex-column border p-1 rounded">
                 <button class="btn btn-warning me-2 m-1" type="button ">Mon compte</button>
                 <button class="btn btn-danger me-2 " type="button ">Deconnexion</button>
             </div>
         </form>
-
     </nav>
-
-    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</html>

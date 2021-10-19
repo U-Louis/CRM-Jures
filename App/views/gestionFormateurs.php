@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-
-    <title>Gestion des formateurs</title>
-</head>
-
-<body>
-
-    <nav class="navbar bg-primary">
-        <form class="container-fluid justify-content-between">
-            <img class="col-1" src="../assets/img/logos/fire.png" alt="logo ">
-            <button class="btn btn-info me-2" type="button">Gestion des modèles de formation</button>
-            <button class="btn btn-info me-2" type="button">Gestion des formations</button>
-            <button class="btn btn-info me-2" type="button">Gestion des formateurs</button>
-            <button class="btn btn-success me-2" type="button">Gestion des sessions d'examen</button>
-            <button class="btn btn-success me-2" type="button">Gestion des jurés</button>
-            <button class="btn btn-success me-2" type="button" disabled>Import VALCES/CERES</button>
-
-            <div class="d-flex flex-column border p-1 rounded">
-                <button class="btn btn-warning me-2 m-1" type="button ">Mon compte</button>
-                <button class="btn btn-danger me-2 " type="button ">Deconnexion</button>
-            </div>
-        </form>
-
-    </nav>
-
-
-    <!-- GESTION DES FORMATEURS -->
+<!-- GESTION DES FORMATEURS -->
     <div class="container-fluid p-4">
         <h2>Gestion des formateurs</h2>
         <input type="text" name="search-bar" placeholder="Tapez ici...">
@@ -86,8 +53,3 @@
         </table>
 
     </div>
-
-
-    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</html>

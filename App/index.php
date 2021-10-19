@@ -52,19 +52,81 @@ echo "GET : "; var_dump($_GET);
 echo "POST : "; var_dump($_POST);
 
     //INIT
-    $action = 'home';
+    $route = 'home';
 
-    if (isset($_GET['action'])) {
-        $action = $_GET['action'];
+    if (isset($_GET['route'])) {
+        $route = $_GET['route'];
     }
 
 
     //Routing
-    switch ($action){
+    switch ($route){
         case 'home':
-            require('App/views/header.php');
-            require('App/views/home.php');
-            require('App/views/footer.php');
+            require('views/header.php');
+            require('views/gestionUtilisateurs.php');
+            require('views/footer.php');
+        break;
+
+        case 'detailJure':
+            require('views/header.php');
+            require('views/detailJure.php');
+            require('views/footer.php');
+        break;
+
+        case 'detailUtilisateur':
+            require('views/header.php');
+            require('views/detailUtilisateur.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionEntreprise':
+            require('views/header.php');
+            require('views/gestionEntreprise.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionFormateurs':
+            require('views/header.php');
+            require('views/gestionFormateurs.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionFormation':
+            require('views/header.php');
+            require('views/gestionFormation.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionFormationPattern':
+            require('views/header.php');
+            require('views/gestionFormationPattern.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionJures':
+            require('views/header.php');
+            require('views/gestionJures.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionJuresDeSession':
+            require('views/header.php');
+            require('views/gestionJuresDeSession.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionSessionsExamen':
+            require('views/header.php');
+            require('views/gestionSessionsExamen.php');
+            require('views/footer.php');
+        break;
+
+        case 'gestionUtilisateurs':
+            require('views/header.php');
+            require('views/gestionUtilisateurs.php');
+            require('views/footer.php');
+        break;
+
     }
 
 

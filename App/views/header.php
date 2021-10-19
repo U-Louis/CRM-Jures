@@ -23,7 +23,6 @@
         <form class="container-fluid justify-content-between" method="$_GET" action="<?php echo $_SERVER["PHP_SELF"]?>">
             <input type="hidden" name="route" value="gestionJures">
             <button class="btn btn-success me-2" type="submit">Gestion des jurés</button>
-
         </form>
 
             <div class="d-flex flex-column border p-1 rounded">

@@ -1,5 +1,4 @@
 <?php
-
     Class Jure extends Contact{
 
         //=================== INIT =========================

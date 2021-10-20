@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 19 oct. 2021 à 14:30
+-- Généré le : mer. 20 oct. 2021 à 12:23
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `VilleAdresse_Contact` char(75) DEFAULT NULL,
   `CodePostalAdresse_Contact` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_Contact`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `contact`
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `detenir` (
   `ID_Jure` int(5) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID_Habilitation`,`ID_Jure`),
   KEY `Detenir_Jure0_FK` (`ID_Jure`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `detenir`
@@ -263,6 +263,7 @@ CREATE TABLE IF NOT EXISTS `formation` (
 --
 
 INSERT INTO `formation` (`ID_formation`, `Libelle_Formation`, `Date_DebutFormation`, `Date_FinFormation`, `ID_formateur`, `ID_formationPattern`) VALUES
+
 ('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', '1', 'DWWM'),
 ('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', '3', 'DWWM'),
 ('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', '2', 'RZO'),
@@ -303,41 +304,43 @@ CREATE TABLE IF NOT EXISTS `habilitation` (
   `Libelle_Habilitation` char(50) NOT NULL,
   `DebutValidite_Habilitation` date DEFAULT NULL,
   `FinValidite_Habilitation` date DEFAULT NULL,
-  PRIMARY KEY (`ID_Habilitation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID_formationPattern` int(5) NOT NULL,
+  PRIMARY KEY (`ID_Habilitation`),
+  KEY `Habilitation_FormationPattern_FK` (`ID_formationPattern`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `habilitation`
 --
 
-INSERT INTO `habilitation` (`ID_Habilitation`, `Libelle_Habilitation`, `DebutValidite_Habilitation`, `FinValidite_Habilitation`) VALUES
-('1', 'Web', '2001-09-15', '2022-04-06'),
-('10', 'Reseau', '1975-09-01', '2031-09-02'),
-('11', 'Reseau', '1985-09-01', '2031-09-02'),
-('12', 'Reseau', '1901-09-01', '2031-09-02'),
-('15', 'Reseau', '2021-09-22', '2020-04-09'),
-('16', 'Reseau', '2021-09-22', '2020-04-09'),
-('17', 'Reseau', '2000-09-22', '2001-04-09'),
-('18', 'Reseau', '2021-09-22', '2020-04-10'),
-('19', 'Reseau', '2021-09-22', '2020-05-09'),
-('2', 'Web', '2002-08-15', '2022-04-06'),
-('20', 'Web', '2001-09-22', '2021-03-09'),
-('21', 'Web', '2001-09-22', '2020-04-09'),
-('22', 'Web', '2001-09-22', '2020-05-09'),
-('23', 'Web', '2001-09-22', '2020-06-09'),
-('24', 'Web', '2001-09-22', '2020-01-09'),
-('25', 'Web', '2001-09-22', '2021-03-09'),
-('26', 'Web', '2001-09-22', '2020-04-09'),
-('27', 'Reseau', '2001-09-22', '2020-05-09'),
-('28', 'Reseau', '2001-09-22', '2020-06-09'),
-('29', 'Web', '2001-09-22', '2020-01-09'),
-('3', 'Web', '2003-09-15', '2022-04-06'),
-('4', 'Web', '2004-11-15', '2022-04-06'),
-('5', 'Web', '2005-09-15', '2022-04-06'),
-('6', 'Web', '2006-09-15', '2022-04-06'),
-('7', 'Reseau', '1971-09-01', '2031-09-02'),
-('8', 'Reseau', '1981-09-01', '2031-09-02'),
-('9', 'Reseau', '1991-09-01', '2031-09-02');
+INSERT INTO `habilitation` (`ID_Habilitation`, `Libelle_Habilitation`, `DebutValidite_Habilitation`, `FinValidite_Habilitation`, `ID_formationPattern`) VALUES
+(1, 'Web', '2001-09-15', '2022-04-06', 1),
+(2, 'Web', '2002-08-15', '2022-04-06', 1),
+(3, 'Web', '2003-09-15', '2022-04-06', 1),
+(4, 'Web', '2004-11-15', '2022-04-06', 1),
+(5, 'Web', '2005-09-15', '2022-04-06', 1),
+(6, 'Web', '2006-09-15', '2022-04-06', 1),
+(7, 'Reseau', '1971-09-01', '2031-09-02', 2),
+(8, 'Reseau', '1981-09-01', '2031-09-02', 2),
+(9, 'Reseau', '1991-09-01', '2031-09-02', 2),
+(10, 'Reseau', '1975-09-01', '2031-09-02', 2),
+(11, 'Reseau', '1985-09-01', '2031-09-02', 2),
+(12, 'Reseau', '1901-09-01', '2031-09-02', 2),
+(15, 'Reseau', '2021-09-22', '2020-04-09', 2),
+(16, 'Reseau', '2021-09-22', '2020-04-09', 2),
+(17, 'Reseau', '2000-09-22', '2001-04-09', 2),
+(18, 'Reseau', '2021-09-22', '2020-04-10', 2),
+(19, 'Reseau', '2021-09-22', '2020-05-09', 2),
+(20, 'Web', '2001-09-22', '2021-03-09', 1),
+(21, 'Web', '2001-09-22', '2020-04-09', 1),
+(22, 'Web', '2001-09-22', '2020-05-09', 1),
+(23, 'Web', '2001-09-22', '2020-06-09', 1),
+(24, 'Web', '2001-09-22', '2020-01-09', 1),
+(25, 'Web', '2001-09-22', '2021-03-09', 1),
+(26, 'Web', '2001-09-22', '2020-04-09', 1),
+(27, 'Reseau', '2001-09-22', '2020-05-09', 2),
+(28, 'Reseau', '2001-09-22', '2020-06-09', 1),
+(29, 'Web', '2001-09-22', '2020-01-09', 1);
 
 -- --------------------------------------------------------
 
@@ -351,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `jure` (
   `ID_Contact` int(5) NOT NULL,
   PRIMARY KEY (`ID_Jure`),
   KEY `Jure_Contact_FK` (`ID_Contact`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `jure`

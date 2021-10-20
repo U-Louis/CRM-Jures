@@ -104,7 +104,7 @@ echo "POST : "; var_dump($_POST);
                     mgr_formationPattern::create();
                 }
                 catch (Exception $e){
-                    echo '<div class="alert alert-warning" role="alert">'.$e.'</div>';
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
                 }
             }
             if( isset($_POST['delFormationPattern'])){
@@ -112,7 +112,7 @@ echo "POST : "; var_dump($_POST);
                     mgr_formationPattern::delete($_POST['delFormationPattern']);
                 }
                 catch (Exception $e){
-                    echo '<div class="alert alert-warning" role="alert">'.$e.'</div>';
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
                 }
             }
             require('views/header.php');

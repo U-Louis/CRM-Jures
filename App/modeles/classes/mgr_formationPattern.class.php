@@ -40,12 +40,12 @@
         
         //test empty
         if ($_POST['libelle'] == ''){
-            throw new Exception("<strong>Libellé vide</strong> <br>");
+            throw new Exception("<strong>Libellé vide  - Ajout impossible</strong> <br>");
             return null;
         }
 
         if ($_POST['descriptif'] == ''){
-            throw new Exception("<strong>Descriptif vide</strong> <br>");
+            throw new Exception("<strong>Descriptif vide  - Ajout impossible</strong> <br>");
             return null;
         }
 
@@ -62,7 +62,7 @@
 
         //Test doublon
         if(in_array($var1, $libs)){
-            throw new Exception("<strong>Duplicata de libellé</strong> <br>");
+            throw new Exception("<strong>Duplicata de libellé - Ajout impossible</strong> <br>");
             return null;
         }
         
@@ -125,11 +125,12 @@
         $res->execute(array($idToDelete));
         $res->closeCursor();
         Connector::disconnect();     
+        }
 
-        /*     public static function update(){
+        public static function update(){
         
-    } */
+        }
     //================== DISPLAY =======================    
-    }
+
 
 }

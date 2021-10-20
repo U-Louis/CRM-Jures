@@ -1,6 +1,8 @@
 <!-- GESTION DES FORMATIONS -->
     <div class="container-fluid p-4">
         <h2>Gestion des formations</h2>
+        <input type="text" name="search-bar" placeholder="Tapez ici...">
+        <input type="button" id="search-button" value="Rechercher">
         <table id="tableGestionFormations" class="table table-striped">
             <thead>
                 <tr>

@@ -14,7 +14,7 @@
          * Connects to the BDD set in the params.ini
          */
         public static function connect() {
-            $file = 'C:\wamp64\www\CRM-Jures\App\params.ini';
+            $file = 'C:\wamp64\www\Fil Rouge\CRM-Jures\App\params.ini';
             if (file_exists($file)) {
                 $params = parse_ini_file($file,true);
                 extract($params['connexion']);

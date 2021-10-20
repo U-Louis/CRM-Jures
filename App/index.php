@@ -115,6 +115,16 @@ echo "POST : "; var_dump($_POST);
                     echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
                 }
             }
+            if( isset($_POST['modificationToConfirm'])){
+                try{
+                    mgr_formationPattern::update($_POST['modificationToConfirm']);
+                }
+                catch (Exception $e){
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
+                }
+                
+            }
+
             require('views/header.php');
             require('views/gestionFormationPattern.php');
             require('views/footer.php');

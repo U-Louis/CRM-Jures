@@ -39,32 +39,31 @@
         }
         
         //test empty
-        if ($_POST['libelle'] == ''){
-            throw new Exception("<strong>Libellé vide  - Ajout impossible</strong> <br>");
-            return null;
-        }
+            if ($_POST['libelle'] == ''){
+                throw new Exception("<strong>Libellé vide  - Ajout impossible</strong> <br>");
+                return null;
+            }
 
-        if ($_POST['descriptif'] == ''){
-            throw new Exception("<strong>Descriptif vide  - Ajout impossible</strong> <br>");
-            return null;
-        }
-
-        //init mgr
-        $tempInstance = new mgr_formationPattern();
-        $list = $tempInstance->read_all();
-
-        $var1 = $_POST['libelle'];
-        $var2 = $_POST['descriptif'];
-        $libs = [];
-        foreach($list as $item){
-            array_push($libs, $item['Libelle_formationPatern']);
-        }
+            if ($_POST['descriptif'] == ''){
+                throw new Exception("<strong>Descriptif vide  - Ajout impossible</strong> <br>");
+                return null;
+            }
 
         //Test doublon
-        if(in_array($var1, $libs)){
-            throw new Exception("<strong>Duplicata de libellé - Ajout impossible</strong> <br>");
-            return null;
-        }
+            $tempInstance = new mgr_formationPattern();
+            $list = $tempInstance->read_all();
+
+            $var1 = $_POST['libelle'];
+            $var2 = $_POST['descriptif'];
+            $libs = [];
+            foreach($list as $item){
+                array_push($libs, $item['Libelle_formationPatern']);
+            }
+
+            if(in_array($var1, $libs)){
+                throw new Exception("<strong>Duplicata de libellé - Ajout impossible</strong> <br>");
+                return null;
+            }
         
 
         //INSERT
@@ -88,49 +87,97 @@
      */
     public static function delete(int $idToDelete){
         //TESTS
-        //test if formation is used in a formation
-        $tempInstance1 = new mgr_formation();
-        $listFormations = $tempInstance1->read_all();
-        $flagFound = false;
-        foreach($listFormations as $item){
-            if($item['ID_formationPattern'] == $idToDelete){
-                $flagFound = true;
-            }
-        }
-        if($flagFound === true) {
-            throw new Exception("<strong>Une formation utilise ce modèle - suppression impossible</strong> <br>");
-            return null;
-        }
-        
+            //test if formation is used in a formation
+                $tempInstance1 = new mgr_formation();
+                $listFormations = $tempInstance1->read_all();
+                $flagFound = false;
+                foreach($listFormations as $item){
+                    if($item['ID_formationPattern'] == $idToDelete){
+                        $flagFound = true;
+                    }
+                }
+                if($flagFound === true) {
+                    throw new Exception("<strong>Une formation utilise ce modèle - suppression impossible</strong> <br>");
+                    return null;
+                }
+            
 
-        //test if formation is used in a formation
-        $tempInstance2 = new mgr_habilitation();
-        $listHabilitations = $tempInstance2->read_all();
-        $flagFound = false;
-        foreach($listHabilitations as $item){
-            if($item['ID_formationPattern'] == $idToDelete){
-                $flagFound = true;
-            }
-        }
-        if($flagFound === true) {
-            throw new Exception("<strong>Une habilitation utilise ce modèle - suppression impossible</strong> <br>");
-            return null;
-        }
+            //test if formation is used in a formation
+                $tempInstance2 = new mgr_habilitation();
+                $listHabilitations = $tempInstance2->read_all();
+                $flagFound = false;
+                foreach($listHabilitations as $item){
+                    if($item['ID_formationPattern'] == $idToDelete){
+                        $flagFound = true;
+                    }
+                }
+                if($flagFound === true) {
+                    throw new Exception("<strong>Une habilitation utilise ce modèle - suppression impossible</strong> <br>");
+                    return null;
+                }
+
         //DELETION
-         $sql = 
-            'DELETE FROM `formationpattern`
-            WHERE `formationpattern`.`ID_formationPattern` = ?';
-        $connexion = Connector::connect();
-        $res = $connexion->prepare($sql);
-        $res->execute(array($idToDelete));
-        $res->closeCursor();
-        Connector::disconnect();     
+            $sql = 
+                'DELETE FROM `formationpattern`
+                WHERE `formationpattern`.`ID_formationPattern` = ?';
+            $connexion = Connector::connect();
+            $res = $connexion->prepare($sql);
+            $res->execute(array($idToDelete));
+            $res->closeCursor();
+            Connector::disconnect();     
+            }
+
+    /**
+     * 
+     */
+    public static function update($idToModify){
+var_dump('CALLED');
+        //INIT
+            $var1 = $_POST['libelleNew'];
+            $var2 = $_POST['descriptifNew'];
+
+        //TESTS
+            //test empty
+                if ($_POST['libelleNew'] == ''){
+                    throw new Exception("<strong>Nouveau libellé vide  - Modification impossible</strong> <br>");
+                    return null;
+                }
+
+                if ($_POST['descriptifNew'] == ''){
+                    throw new Exception("<strong>Nouveau descriptif vide  - Modification impossible</strong> <br>");
+                    return null;
+                }
+
+            //Test doublon
+                $tempInstance = new mgr_formationPattern();
+                $list = $tempInstance->read_all();
+                $libs = [];
+                foreach($list as $item){
+                    array_push($libs, $item['Libelle_formationPatern']);
+                }
+                
+                if(in_array($var1, $libs)){
+                    throw new Exception("<strong>Duplicata de libellé - Modification impossible</strong> <br>");
+                    return null;
+                }
+
+var_dump('ALL OK');
+
+        //UPDATE
+            $sql = '
+            UPDATE `formationpattern`
+            SET
+            `Libelle_formationPatern` = " marchepas",
+            `Descriptif_formation` =  " marchepas"
+            WHERE `formationpattern`.`ID_formationPattern` = "8"'
+            ;
+            $connexion = Connector::connect();
+            $res = $connexion->prepare($sql);
+            $res->execute(array($var1, $var2, $idToModify));
+            $res->closeCursor();
+            Connector::disconnect();     
+            }
+
         }
 
-        public static function update(){
-        
-        }
-    //================== DISPLAY =======================    
 
-
-}

@@ -15,19 +15,15 @@
     <nav class="navbar bg-primary">
         <form class="container-fluid justify-content-between" method="$_GET" action="index.php">
             <img class="col-1" src="assets/img/logos/fire.png" alt="logo ">
-            <input class="btn btn-info me-2" type="input">Gestion des modèles de formation</input>
-            <input class="btn btn-info me-2" type="input">Gestion des formations</button>
-            <input class="btn btn-info me-2" type="input">Gestion des formateurs</button>
-            <input class="btn btn-success me-2" type="input">Gestion des sessions d'examen</button>
-
-        <form class="container-fluid justify-content-between" method="$_GET" action="<?php echo $_SERVER["PHP_SELF"]?>">
-            <input type="hidden" name="route" value="gestionJures">
-            <button class="btn btn-success me-2" type="submit">Gestion des jurés</button>
-        </form>
+            <input class="btn btn-info" type="submit" name="route" value="Gestion des modèles de formation">
+            <input class="btn btn-info" type="submit" name="route" value="Gestion des formations">
+            <input class="btn btn-info" type="submit" name="route" value="Gestion des formateurs">
+            <input class="btn btn-success" type="submit" name="route" value="Gestion des sessions d'examen">
+            <input class="btn btn-success" type="submit" name="route" value="Gestion des jurés">
 
             <div class="d-flex flex-column border p-1 rounded">
-                <input class="btn btn-warning me-2 m-1" type="button ">Mon compte</button>
-                <input class="btn btn-danger me-2 " type="button ">Deconnexion</button>
+                <input class="btn btn-warning m-1" name="route" type="submit" value="Mon compte">
+                <input class="btn btn-danger" name="route" type="submit" value="Deconnexion">
             </div>
         </form>
     </nav>

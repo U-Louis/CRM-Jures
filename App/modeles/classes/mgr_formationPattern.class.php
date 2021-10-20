@@ -22,7 +22,6 @@
         $res->closeCursor();
         Connector::disconnect();
         self::$list = $ans;
-var_dump(self::$list);
         return $ans;
     }
     
@@ -44,8 +43,7 @@ var_dump(self::$list);
         $var1 = $_POST['libelle'];
         $var2 = $_POST['descriptif'];
         //test vars
-var_dump($var1);
-var_dump($var2);
+
 
         //INSERT
 /*         try{ */        

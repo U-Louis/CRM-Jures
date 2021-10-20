@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 20 oct. 2021 à 12:23
+-- Généré le : mer. 20 oct. 2021 à 12:39
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -263,10 +263,10 @@ CREATE TABLE IF NOT EXISTS `formation` (
 --
 
 INSERT INTO `formation` (`ID_formation`, `Libelle_Formation`, `Date_DebutFormation`, `Date_FinFormation`, `ID_formateur`, `ID_formationPattern`) VALUES
-('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 1, 'DWWM'),
-('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 3, 'DWWM'),
-('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 2, 'RZO'),
-('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 4, 'RZO');
+('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 1, '1'),
+('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 3, '4'),
+('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 2, '2'),
+('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 4, '2');
 
 -- --------------------------------------------------------
 
@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
   `Libelle_formationPatern` char(255) NOT NULL,
   `Descriptif_formation` char(255) DEFAULT NULL,
   PRIMARY KEY (`ID_formationPattern`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `formationpattern`
@@ -289,7 +289,8 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
 INSERT INTO `formationpattern` (`ID_formationPattern`, `Libelle_formationPatern`, `Descriptif_formation`) VALUES
 (1, 'dev web & web mobile', 'On apprend plein de trucs supers'),
 (2, 'Formation réseau', 'On apprend plein de choses pour faire des rézos'),
-(3, 'test', 'test');
+(4, 'Une formation', 'm utilise :('),
+(5, 'Une habilitation', 'm utilise :(');
 
 -- --------------------------------------------------------
 
@@ -306,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `habilitation` (
   `ID_formationPattern` int(5) NOT NULL,
   PRIMARY KEY (`ID_Habilitation`),
   KEY `Habilitation_FormationPattern_FK` (`ID_formationPattern`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `habilitation`
@@ -339,7 +340,8 @@ INSERT INTO `habilitation` (`ID_Habilitation`, `Libelle_Habilitation`, `DebutVal
 (26, 'Web', '2001-09-22', '2020-04-09', 1),
 (27, 'Reseau', '2001-09-22', '2020-05-09', 2),
 (28, 'Reseau', '2001-09-22', '2020-06-09', 1),
-(29, 'Web', '2001-09-22', '2020-01-09', 1);
+(29, 'Web', '2001-09-22', '2020-01-09', 1),
+(300, 'mince alors', '2021-10-05', '2021-10-15', 5);
 
 -- --------------------------------------------------------
 

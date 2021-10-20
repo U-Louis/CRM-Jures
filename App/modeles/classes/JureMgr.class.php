@@ -10,15 +10,12 @@
          */
         public static function read_all() : array {
             // request
-            $sql = "SELECT Nom_contact, Prenom_contact, Libelle_Habilitation, s.libelle_specialite, Mail_contact FROM jure j JOIN contact c ON c.ID_Contact = j.ID_Contact
+            $sql = "SELECT Nom_contact, Prenom_contact, GROUP_CONCAT(libelle_specialite) as libelle_specialite, Mail_contact FROM jure j JOIN contact c ON c.ID_Contact = j.ID_Contact
             LEFT JOIN detenir d
                 ON j.ID_Jure = d.ID_Jure
-            JOIN habilitation h
-                ON d.ID_Habilitation = h.ID_Habilitation
             JOIN specialiste sp
                 ON j.ID_Jure = sp.ID_Jure
-            JOIN specialite s
-                ON sp.libelle_specialite = s.libelle_specialite
+            GROUP BY c.ID_contact
             ORDER BY Nom_contact";
 
             // get connect
@@ -39,6 +36,52 @@
 
             return $records;
 
+        }
+
+        public static function create() {
+            if(!isset($_POST["nomContact"]) && isset($_POST["prenomContact"]) && isset($_POST["tel"]) && isset($_POST["mail"]) && isset($_POST["numAdresse"]) && isset($_POST["libelAdresse"]) && isset($_POST["vilAdresse"]) && isset($_POST["CPAdresse"])&& isset($_POST["specialite1"])){
+                return null;
+            }
+
+            $name = $_POST["nomJure"];
+            $prenom = $_POST["prenomJure"];
+            $tel = $_POST["tel"];
+            $tel2 = $_POST["tel2"];
+            $mail = $_POST["mail"];
+            $numAdresse = $_POST["numAdresse"];
+            $libelAdresse = $_POST["libelAdresse"];
+            $complAdresse = $_POST["comAdresse"];
+            $vilAdresse = $_POST["vilAdresse"];
+            $cpAdresse = $_POST["CPAdresse"];
+            $entreprise = $_POST["entreprise"];
+            $specialite = $_POST["specialite1"];
+            $habilitation = $_POST["choixHab1"];
+            $dateDebHab = $_POST["dateDebHabilitation1"];
+            $dateFinHab = $_POST["dateFinHabilitation1"];
+
+            $sql = "INSERT INTO contact (Nom_contact,Prenom_contact,Tel_contact, Tel2_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
+            VALUES (:nom,:prenom,:tel,:tel2,:mail,:numAd,:rue,:comp,:ville,:cp);
+            -- Lien entre contact et Juré
+            INSERT INTO jure(ID_Contact) 
+              SELECT ID_Contact 
+              FROM contact
+              WHERE Nom_conntact = :nom
+                  AND Prenom_contact = :prenom 
+                  
+            -- Lien entre entreprise et Juré
+            INSERT INTO travailler(ID_Jure)
+                SELECT ID_Jure
+                FROM jure j
+                JOIN 
+            ";
+            
+            
+            $connexionPDO = Connector::getConnexion();
+            $request = $connexionPDO->prepare($sql);
+            $request->execute(array(':nom'=>$name, ':prenom'=>$prenom,':tel'=>$tel,':tel2'=>$tel2,':mail'=>$mail,':numAd'=>$numAdresse,':rue'=>$libelAdresse,':comp'=>$complAdresse,':ville'=>$vilAdresse,':cp'=>$cpAdresse,$entreprise,$specialite,$habilitation,$dateDebHab,$dateFinHab));
+
+            $request->closeCursor();
+            Connector::disconnect();
         }
     }
 ?>

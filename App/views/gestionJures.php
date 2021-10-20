@@ -8,7 +8,6 @@
                 <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
-                    <th scope="col">Habilitation</th>
                     <th scope="col">Spécialité</th>
                     <th scope="col">Mail</th>
                     <th scope="col">Détail</th>
@@ -16,12 +15,9 @@
             </thead>
             <tbody>
             <tr>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td colspan="2"><a href="#" class="btn btn-success">Ajouter</a></td>
+                <form method="$_GET" action="index.php">
+                <input class="btn btn-success" type="submit" name="route" value="Ajouter un juré">
+                </form>
             </tr>
             <tr>
                 <?php
@@ -34,8 +30,6 @@
                         $item["Nom_contact"].
                         '</td><td>'.
                         $item["Prenom_contact"]. 
-                        '</td><td>'.
-                        $item["Libelle_Habilitation"].
                         '</td><td>'.
                         $item["libelle_specialite"].
                         '</td><td>'.

@@ -69,6 +69,14 @@
                 FROM contact
                 WHERE Nom_contact = :entrepr;
 
+            INSERT INTO travailler (ID_Entreprise, ID_Jure)
+                SELECT ID_Entreprise, ID_Jure
+                FROM entreprise e
+                JOIN contact c
+                    ON c.ID_Contact = e.ID_Contact
+                JOIN jure j
+                    ON j.ID_Contact = c.ID_Contact
+                WHERE 
             ";
             
             

@@ -125,7 +125,13 @@ echo "POST : "; var_dump($_POST);
             require('views/gestionJures.php');
             require('views/footer.php');
         break;
-
+        
+        case "Ajouter un juré":
+            require('views/header.php');
+            require('views/nouveauJure.php');
+            require('views/footer.php');
+        break;
+        
         case 'gestionJuresDeSession':
             require('views/header.php');
             require('views/gestionJuresDeSession.php');

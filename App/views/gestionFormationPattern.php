@@ -19,7 +19,7 @@
                     '<td>' . $item['Libelle_formationPatern'] . '</td>'.
                     '<td>' . $item['Descriptif_formation'] . '</td>'.
                     '<td><a href="#" class="btn btn-info">Modifier</a></td>
-                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a>'
+                    <td><input type="submit" href="#" class="btn btn-outline-danger" id="idToDelete'.$item['ID_formationPattern'].'" value="Supprimer">'
                     ;                    
                 }
                 ?>

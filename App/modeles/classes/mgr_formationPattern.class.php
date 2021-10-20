@@ -116,16 +116,15 @@
             throw new Exception("<strong>Une habilitation utilise ce modèle - suppression impossible</strong> <br>");
             return null;
         }
-var_dump('DELETION DELETION DELETION DELETION DELETION');
         //DELETION
-/*         $sql = 
+         $sql = 
             'DELETE FROM `formationpattern`
             WHERE `formationpattern`.`ID_formationPattern` = ?';
         $connexion = Connector::connect();
         $res = $connexion->prepare($sql);
         $res->execute(array($idToDelete));
         $res->closeCursor();
-        Connector::disconnect();     */
+        Connector::disconnect();     
 
         /*     public static function update(){
         

@@ -55,21 +55,32 @@
         <label for="specialite1"> Première spécialité :</label>
         <input type="text" name="specialite1" value="SQL">
 
-        <p>Avez vous une habilitation pour cette spécialité ?</p>
+        <p>Avez vous une habilitation?</p>
         <input type="radio" name="choixHab1" id="ouiHab1" >
         <label for="ouiHab1">Oui</label>
         <input type="radio" name="choixHab1" id="nonHab1">
         <label for="nonHab1">Non</label>
+    <div class="hidden" id="habilitationDiv">
+        <label for="habilitation">Quel est votre habilitation ?</label>
+        <input type="text" name="habilitation">
+        <div class="hidden">
+            <label for="habilitationNew">Écrivez le titre de votre habiliation</label>
+            <input type="text" name="habilitationNew">
+        </div>
 
         <label for="dateDebHabilitation1">Début de validité : </label>
-        <input type="date" name="dateDebHabilitation1" value="1993-11-24">
+        <input type="date" name="dateDebHabilitation1"  value="1993-11-24">
 
         <label for="dateFinHabilitation1">Fin de validité : </label>
-        <input type="date" name="dateFinHabilitation1" value="2023-11-24">
+        <input type="date" name="dateFinHabilitation1"  value="2023-11-24">
+    </div>
+        
 
         <div>
             <input type="reset" class="btn btn-danger" value="Annuler">
             <input type="submit" class="btn btn-success" value="Valider">
         </div>
+
+        <script src="assets\script\script.js"></script>
 </form>
 </div>

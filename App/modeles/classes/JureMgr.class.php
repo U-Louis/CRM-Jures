@@ -69,6 +69,8 @@
                 FROM contact
                 WHERE Nom_contact = :entrepr;
 
+            
+
             ";
             
             

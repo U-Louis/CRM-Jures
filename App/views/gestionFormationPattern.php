@@ -14,24 +14,83 @@
                 <?php
                 $tempInstance = new mgr_formationPattern();
                 $list = $tempInstance->read_all('formationpattern');
-                foreach($list as $item){
+
+                if(isset($_POST['modifyFormationPattern'])){
+                    //$item =  //modifyFormationPattern donne l'id
                     echo '<tr>' .
-                    '<td>' . $item['Libelle_formationPatern'] . '</td>'.
-                    '<td>' . $item['Descriptif_formation'] . '</td>'.
-                    '<td><a href="#" class="btn btn-info">Modifier</a></td>
-                    <td><input type="submit" href="#" class="btn btn-outline-danger" id="idToDelete'.$item['ID_formationPattern'].'" value="Supprimer">'
-                    ;                    
+                        '<td>' . $item['Libelle_formationPatern'] . '</td>'.
+                        '<td>' . $item['Descriptif_formation'] . '</td>'.
+                        '<td>
+                        <form method="POST">
+                        <button name="modifyFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-info"';
+                    if(isset($_POST['modifyFormationPattern'])){
+                        echo 'disabled';
+                    }
+                    echo '>Modifier</button>
+                        </form>'.
+                        '<td><form method="POST">
+                        <button name="delFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-outline-danger"';
+                    if(isset($_POST['modifyFormationPattern'])){
+                            echo 'disabled';
+                    }
+                    echo '    
+                        >Supprimer</button>
+                        </form>'
+                    ;
+                    if(isset($_POST['modifyFormationPattern'])){
+                        echo '
+                        <tr>
+                            <form method="POST">
+                                <td>
+                                    <input type="text" name="libelleNew">
+                                </td>
+                                <td>
+                                    <input type="text" name="descriptifNew">
+                                </td>
+                                <td colspan="2">
+                                    <input type="submit" name="modificationToConfirm" class="btn btn-success" value="Confirmer">
+                                </td>
+                            </form>
+                        </tr>
+                        '
+                        ;
+
+                    }
                 }
-                ?>
+                else{
+                    foreach($list as $item){
+                        echo '<tr>' .
+                        '<td>' . $item['Libelle_formationPatern'] . '</td>'.
+                        '<td>' . $item['Descriptif_formation'] . '</td>'.
+                        '<td>
+                        <form method="POST">
+                        <button name="modifyFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-info">Modifier</button>
+                        </form>'.
+                        '<td><form method="POST">
+                        <button name="delFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-outline-danger">Supprimer</button>
+                        </form>'
+                        ;    
+                    }
+                }
+
+
+
+                if(!isset($_POST['modifyFormationPattern'])){
+                echo '
                 <tr>
                     <form method="POST">
                         <td><input type="text" name="libelle"></td>
                         <td><input type="text" name="descriptif"></td>
                         <td colspan="2">
-                            <input type="submit" class="btn btn-success" value="Ajouter">
+                            <input type="submit" name="addFormationPattern" class="btn btn-success" value="Ajouter">
                         </td>
                     </form>
                 </tr>
+                ';
+                }
+                ?>
+
+
             </tbody>
         </table>
     </div>

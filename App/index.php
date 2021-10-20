@@ -48,8 +48,8 @@
         include "modeles/classes/" . $classe . ".class.php";
         });
 
-/* echo "GET : "; var_dump($_GET);
-echo "POST : "; var_dump($_POST); */
+echo "GET : "; var_dump($_GET);
+echo "POST : "; var_dump($_POST);
 
     //INIT
     $route = 'home';
@@ -101,9 +101,33 @@ echo "POST : "; var_dump($_POST); */
         break;
 
         case 'Gestion des modèles de formation':
-            if((isset($_POST['libelle']) || isset($_POST['descriptif']))){
-                mgr_formationPattern::create();
+            if( ( isset($_POST['libelle']) || isset($_POST['descriptif']) )
+            && (isset($_POST['addFormationPattern'])) ){
+                try{
+                    mgr_formationPattern::create();
+                }
+                catch (Exception $e){
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
+                }
             }
+            if( isset($_POST['delFormationPattern'])){
+                try{
+                    mgr_formationPattern::delete($_POST['delFormationPattern']);
+                }
+                catch (Exception $e){
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
+                }
+            }
+            if( isset($_POST['modificationToConfirm'])){
+                try{
+                    mgr_formationPattern::update($_POST['modificationToConfirm']);
+                }
+                catch (Exception $e){
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
+                }
+                
+            }
+
             require('views/header.php');
             require('views/gestionFormationPattern.php');
             require('views/footer.php');

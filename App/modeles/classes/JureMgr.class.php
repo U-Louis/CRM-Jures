@@ -39,14 +39,13 @@
         }
 
         public static function create() {
-            if(!isset($_POST["nomContact"]) && isset($_POST["prenomContact"]) && isset($_POST["tel"]) && isset($_POST["mail"]) && isset($_POST["numAdresse"]) && isset($_POST["libelAdresse"]) && isset($_POST["vilAdresse"]) && isset($_POST["CPAdresse"])&& isset($_POST["specialite1"])){
+            if(!isset($_POST["nomContact"]) && isset($_POST["prenomContact"]) && isset($_POST["tel"]) && isset($_POST["mail"]) && isset($_POST["numAdresse"]) && isset($_POST["libelAdresse"]) && isset($_POST["vilAdresse"]) && isset($_POST["CPAdresse"])){
                 return null;
             }
 
-            $name = $_POST["nomJure"];
-            $prenom = $_POST["prenomJure"];
+            $name = $_POST["nomContact"];
+            $prenom = $_POST["prenomContact"];
             $tel = $_POST["tel"];
-            $tel2 = $_POST["tel2"];
             $mail = $_POST["mail"];
             $numAdresse = $_POST["numAdresse"];
             $libelAdresse = $_POST["libelAdresse"];
@@ -54,31 +53,28 @@
             $vilAdresse = $_POST["vilAdresse"];
             $cpAdresse = $_POST["CPAdresse"];
             $entreprise = $_POST["entreprise"];
-            $specialite = $_POST["specialite1"];
-            $habilitation = $_POST["choixHab1"];
-            $dateDebHab = $_POST["dateDebHabilitation1"];
-            $dateFinHab = $_POST["dateFinHabilitation1"];
 
-            $sql = "INSERT INTO contact (Nom_contact,Prenom_contact,Tel_contact, Tel2_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
-            VALUES (:nom,:prenom,:tel,:tel2,:mail,:numAd,:rue,:comp,:ville,:cp);
-            -- Lien entre contact et Juré
-            INSERT INTO jure(ID_Contact) 
-              SELECT ID_Contact 
-              FROM contact
-              WHERE Nom_conntact = :nom
-                  AND Prenom_contact = :prenom 
-                  
-            -- Lien entre entreprise et Juré
-            INSERT INTO travailler(ID_Jure)
-                SELECT ID_Jure
-                FROM jure j
-                JOIN 
+            $sql = "INSERT INTO contact (Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
+            VALUES (:nom,:prenom,:tel,:mail,:numAd,:rue,:comp,:ville,:cp);
+
+            INSERT INTO jure (ID_Contact)
+                SELECT ID_Contact
+                FROM contact
+                WHERE Nom_contact = :nom AND Prenom_contact = :prenom;
+            
+            INSERT INTO contact (Nom_contact) VALUES (:entrepr);
+
+            INSERT INTO entreprise (ID_Contact)
+                SELECT ID_Contact
+                FROM contact
+                WHERE Nom_contact = :entrepr;
+
             ";
             
             
             $connexionPDO = Connector::getConnexion();
             $request = $connexionPDO->prepare($sql);
-            $request->execute(array(':nom'=>$name, ':prenom'=>$prenom,':tel'=>$tel,':tel2'=>$tel2,':mail'=>$mail,':numAd'=>$numAdresse,':rue'=>$libelAdresse,':comp'=>$complAdresse,':ville'=>$vilAdresse,':cp'=>$cpAdresse,$entreprise,$specialite,$habilitation,$dateDebHab,$dateFinHab));
+            $request->execute(array(':nom'=>$name, ':prenom'=>$prenom,':tel'=>$tel,':mail'=>$mail,':numAd'=>$numAdresse,':rue'=>$libelAdresse,':comp'=>$complAdresse,':ville'=>$vilAdresse,':cp'=>$cpAdresse,':entrepr'=>$entreprise));
 
             $request->closeCursor();
             Connector::disconnect();

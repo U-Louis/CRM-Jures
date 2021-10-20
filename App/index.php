@@ -60,6 +60,9 @@ echo "POST : "; var_dump($_POST); */
 
 
     //Routing
+    print_r($_POST);
+    print_r($_GET);
+
     switch ($route){
         case 'home':
             require('views/header.php');
@@ -113,11 +116,18 @@ echo "POST : "; var_dump($_POST); */
         break;
         
         case "Ajouter un juré":
-            require('views/header.php');
-            require('views/nouveauJure.php');
-            require('views/footer.php');
+            if(isset($_POST['nomContact']) && isset($_POST['prenomContact']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['numAdresse']) && isset($_POST['libelAdresse']) && isset($_POST['vilAdresse']) && isset($_POST['CPAdresse'])){
+                echo "<script>alert('Juré bien ajouté')</script>";
+                JureMgr::create();
+            }
+            else{
+                require('views/header.php');
+                require('views/nouveauJure.php');
+                require('views/footer.php');
+            }
+            
         break;
-        
+    
         case 'gestionJuresDeSession':
             require('views/header.php');
             require('views/gestionJuresDeSession.php');

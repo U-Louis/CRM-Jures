@@ -199,7 +199,7 @@ INSERT INTO `detenir` (`ID_Habilitation`, `ID_Jure`) VALUES
 
 DROP TABLE IF EXISTS `entreprise`;
 CREATE TABLE IF NOT EXISTS `entreprise` (
-  `ID_Entreprise` int(5) NOT NULL,
+  `ID_Entreprise` int(5) NOT NULL AUTO_INCREMENT,
   `ID_Contact` int(5) NOT NULL,
   PRIMARY KEY (`ID_Entreprise`),
   KEY `Entreprise_Contact_FK` (`ID_Contact`)

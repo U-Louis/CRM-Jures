@@ -5,6 +5,9 @@
 
 
     Class mgr_formationPattern {
+        
+        //INIT
+        private static $list;
 
     //================== METHODS =======================
     public static function read_all(string $table/* , string $class */) {
@@ -18,16 +21,45 @@
         $ans = $res->fetchAll();
         $res->closeCursor();
         Connector::disconnect();
+        self::$list = $ans;
         return $ans;
     }
     
-    public static function read_byParam(){
+/*     public static function read_byParam(){
         
-    }
+    } */
         
     public static function create(){
 
-    }
+        //INIT
+        if(!(isset($_POST['libelle']) && isset($_POST['descriptif']))){
+            return null;
+        }
+/*         if(in_array($_POST['libelle'], self::$list['Libelle_formationPatern'])){
+            throw new Exception("Duplicata de libellé");
+            return null;
+        } */
+
+        $var1 = $_POST['libelle'];
+        $var2 = $_POST['descriptif'];
+        //test vars
+
+
+        //INSERT
+/*         try{ */        
+        $sql = 
+            'INSERT INTO `formationpattern`
+            ( `Libelle_formationPatern`, `Descriptif_formation`)
+            VALUES (?,?)'; 
+        $connexion = Connector::connect();
+        $res = $connexion->prepare($sql);
+        $res->execute(array($var1, $var2));
+
+        $res->closeCursor();
+        Connector::disconnect();
+
+/*     }catch(PDOexception $e){}
+ */    }
         
     public static function update(){
         

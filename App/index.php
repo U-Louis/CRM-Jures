@@ -48,8 +48,8 @@
         include "modeles/classes/" . $classe . ".class.php";
         });
 
-echo "GET : "; var_dump($_GET);
-echo "POST : "; var_dump($_POST);
+/* echo "GET : "; var_dump($_GET);
+echo "POST : "; var_dump($_POST); */
 
     //INIT
     $route = 'home';
@@ -85,25 +85,28 @@ echo "POST : "; var_dump($_POST);
             require('views/footer.php');
         break;
 
-        case 'gestionFormateurs':
+        case 'Gestion des formateurs':
             require('views/header.php');
             require('views/gestionFormateurs.php');
             require('views/footer.php');
         break;
 
-        case 'gestionFormation':
+        case 'Gestion des formations':
             require('views/header.php');
             require('views/gestionFormation.php');
             require('views/footer.php');
         break;
 
-        case 'gestionFormationPattern':
+        case 'Gestion des modèles de formation':
+            if((isset($_POST['libelle']) || isset($_POST['descriptif']))){
+                mgr_formationPattern::create();
+            }
             require('views/header.php');
             require('views/gestionFormationPattern.php');
             require('views/footer.php');
         break;
 
-        case 'gestionJures':
+        case 'Gestion des jurés':
             require('views/header.php');
             require('views/gestionJures.php');
             require('views/footer.php');
@@ -115,7 +118,7 @@ echo "POST : "; var_dump($_POST);
             require('views/footer.php');
         break;
 
-        case 'gestionSessionsExamen':
+        case 'Gestion des sessions d\'examen':
             require('views/header.php');
             require('views/gestionSessionsExamen.php');
             require('views/footer.php');
@@ -126,6 +129,17 @@ echo "POST : "; var_dump($_POST);
             require('views/gestionUtilisateurs.php');
             require('views/footer.php');
         break;
+
+        case 'Mon compte':
+            require('views/header.php');
+            require('views/detailUtilisateur.php');
+            require('views/footer.php');
+        break;
+
+        case 'Deconnexion':
+            require('views/connexion.php');
+        break;
+
 
     }
 

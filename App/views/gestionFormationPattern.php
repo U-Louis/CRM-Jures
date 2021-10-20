@@ -18,17 +18,20 @@
                     echo '<tr>' .
                     '<td>' . $item['Libelle_formationPatern'] . '</td>'.
                     '<td>' . $item['Descriptif_formation'] . '</td>'.
-                    '<td><a href="#" class="btn btn-info">Modifier</a></td>
-                    <td><input type="submit" href="#" class="btn btn-outline-danger" id="idToDelete'.$item['ID_formationPattern'].'" value="Supprimer">'
+                    '<td><a href="#" class="btn btn-info">Modifier</a></td>'.
+                    '<td><form method="POST">
+                    <button name="delFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-outline-danger">Supprimer</button>
+                    </form>'
                     ;                    
                 }
                 ?>
+
                 <tr>
                     <form method="POST">
                         <td><input type="text" name="libelle"></td>
                         <td><input type="text" name="descriptif"></td>
                         <td colspan="2">
-                            <input type="submit" class="btn btn-success" value="Ajouter">
+                            <input type="submit" name="addFormationPattern" class="btn btn-success" value="Ajouter">
                         </td>
                     </form>
                 </tr>

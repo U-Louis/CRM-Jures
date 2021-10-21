@@ -10,7 +10,7 @@
                     <th scope="col">Prenom</th>
                     <th scope="col">Spécialité</th>
                     <th scope="col">Mail</th>
-                    <th scope="col">Détail</th>
+                    <th scope="col">Gestion</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                 <?php
                     $newMgrJure = new JureMgr();
                     $list = $newMgrJure->read_all();
-// var_dump($list);
+var_dump($_POST);
                     
                     foreach($list as $item){
                         echo "<tr><td>".
@@ -34,7 +34,15 @@
                         $item["libelle_specialite"].
                         '</td><td>'.
                         $item["Mail_contact"].
-                        '</td><td><button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td></tr>';
+                        '</td><td>
+                        <form method="POST">
+
+                            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                            <input name="deleteJure" type="hidden" value ="'.$item["ID_Contact"].'">
+
+                        </form>
+                            <button name="modifyJure" class="btn btn-info">Modifier</button>
+                            <button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td></tr>';
                     }
                 ?>
             </tbody>

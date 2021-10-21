@@ -85,6 +85,9 @@
         break;
 
         case 'Gestion des jurés':
+            if(isset($POST["deleteJure"])){
+                JureMgr::delete();
+            }
             require('views/header.php');
             require('views/gestionJures.php');
             require('views/footer.php');

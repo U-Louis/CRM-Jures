@@ -62,11 +62,7 @@
         <label for="nonHab1">Non</label>
     <div class="hidden" id="habilitationDiv">
         <label for="habilitation">Quel est votre habilitation ?</label>
-        <input type="text" name="habilitation">
-        <div class="hidden">
-            <label for="habilitationNew">Écrivez le titre de votre habiliation</label>
-            <input type="text" name="habilitationNew">
-        </div>
+        <input type="text" name="habilitation" value="Web">
 
         <label for="dateDebHabilitation1">Début de validité : </label>
         <input type="date" name="dateDebHabilitation1"  value="1993-11-24">

@@ -23,5 +23,9 @@
         }
 
         //================== METHODS =======================
-        //================== DISPLAY =======================
+
+        //to do 
+            //externaliser contactAttributes
+            //get contactAttributes from ID with database request
+
     }

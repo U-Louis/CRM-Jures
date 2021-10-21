@@ -14,42 +14,43 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>06/12/24</td>
-                    <td>07/12/24</td>
-                    <td>Fernand Format'Heure</td>
-                    <td>DWWM</td>
-                    <td><a href="#" class="btn btn-info">Modifier</a></td>
-                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a>
+                <?php
+                $tempInstance = new mgr_formation();
+                $list = $tempInstance->read_all('formation');
 
-                </tr>
+                foreach($list as $item){
+                    echo '<tr>' .
+                    '<td>' . $item['Libelle_Formation'] . '</td>'.
+                    '<td>' . $item['Date_DebutFormation'] . '</td>'.
+                    '<td>' . $item['Date_FinFormation'] . '</td>'.
+                    '<td>' . $item['nom_contact'] . '</td>'.
+                    '<td>' . $item['Libelle_formationPatern'] . '</td>'.
+
+                    '<td>
+                    <form method="POST">
+                        <button name="modifyFormationPattern" value="'.$item['ID_formation'].'" class="btn btn-info">Modifier</button>
+                    </form>'.
+                    '<td>
+                    <form method="POST">
+                        <button name="delFormationPattern" value="'.$item['ID_formation'].'" class="btn btn-outline-danger">Supprimer</button>
+                    </form>'
+                    ;    
+                }
+                echo '
                 <tr>
-                    <td>Mark</td>
-                    <td>06/12/24</td>
-                    <td>07/12/24</td>
-                    <td>Fernand Format'Heure</td>
-                    <td>DWWM</td>
-                    <td><a href="#" class="btn btn-info">Modifier</a></td>
-                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a>
+                    <form method="POST">
+                        <td><input type="text" name="libelle"></td>
+                        <td><input type="text" name="descriptif"></td>
+                        <td><input type="text" name="descriptif"></td>
+                        <td><input type="text" name="descriptif"></td>
+                        <td><input type="text" name="descriptif"></td>
+                        <td colspan="2">
+                            <input type="submit" name="addFormationPattern" class="btn btn-success" value="Ajouter">
+                        </td>
+                    </form>
                 </tr>
-                <tr>
-                    <td>Mark</td>
-                    <td>06/12/24</td>
-                    <td>07/12/24</td>
-                    <td>Fernand Format'Heure</td>
-                    <td>DWWM</td>
-                    <td><a href="#" class="btn btn-info">Modifier</a></td>
-                    <td><a href="#" class="btn btn-outline-danger">Supprimer</a>
-                </tr>
-                <tr>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td colspan="2"><a href="#" class="btn btn-success">Ajouter</a></td>
-                </tr>
+                ';
+            ?>
             </tbody>
         </table>
     </div>

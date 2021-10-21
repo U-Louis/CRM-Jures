@@ -130,8 +130,8 @@
      * 
      */
     public static function update($idToModify){
-/* var_dump('CALLED');
- */        //INIT
+//var_dump('CALLED');
+        //INIT
             $var1 = $_POST['libelleNew'];
             $var2 = $_POST['descriptifNew'];
 
@@ -150,22 +150,16 @@
             //Test doublon
                 $tempInstance = new mgr_formationPattern();
                 $list = $tempInstance->read_all();
-                $libs = [];
-                foreach($list as $item){
-                    //excluding the current libelle
-                    if($item['Libelle_formationPatern'] != $var1){
-                        //filtering the rest
-                        array_push($libs, $item['Libelle_formationPatern']);
-                    }
-                }
-                
-                if(in_array($var1, $libs)){
-                    throw new Exception("<strong>Duplicata de libellé - Modification impossible</strong> <br>");
-                    return null;
-                }
+                foreach($list as $item){                    
+                    if($item['Libelle_formationPatern'] == $var1){
+                        //excluding the current libelle
+                        if($item['ID_formationPattern'] != $idToModify){
+                            //filtering the rest
+                            throw new Exception("<strong>Duplicata de libellé - Modification impossible</strong> <br>");
+                            return null;
+                        }
 
-/* var_dump('ALL OK');
- */
+//var_dump('ALL OK');
         //UPDATE
             $sql = '
             UPDATE `formationpattern`
@@ -180,7 +174,7 @@
             $res->bindValue(':var2', $var2, PDO::PARAM_STR);
             $res->bindValue(':idto', $idToModify, PDO::PARAM_INT);
             $res->execute();
-            $res->debugDumpParams();
+//$res->debugDumpParams();
             $res->closeCursor();
             Connector::disconnect();     
             }

@@ -12,8 +12,8 @@
 
 
     //Routing
-/* var_dump($_GET);
-var_dump($_POST); */
+var_dump($_GET);
+var_dump($_POST);
 
     switch ($route){
         case 'home':
@@ -76,8 +76,7 @@ var_dump($_POST); */
                 }
                 catch (Exception $e){
                     echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
-                }
-                
+                }                
             }
 
             require('views/header.php');

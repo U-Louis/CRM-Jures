@@ -42,10 +42,10 @@
                         <tr>
                             <form method="POST">
                                 <td>
-                                    <input type="text" name="libelleNew">
+                                    <input type="text" name="libelleNew" value="'.$item['Libelle_formationPatern'].'">
                                 </td>
                                 <td>
-                                    <input type="text" name="descriptifNew">
+                                    <input type="text" name="descriptifNew" value="'.$item['Descriptif_formation'].'">
                                 </td>
                                 <td colspan="2">
                                     <form>

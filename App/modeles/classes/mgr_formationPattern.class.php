@@ -158,6 +158,8 @@
                             throw new Exception("<strong>Duplicata de libellé - Modification impossible</strong> <br>");
                             return null;
                         }
+                    }
+                }
 
 //var_dump('ALL OK');
         //UPDATE
@@ -180,5 +182,3 @@
             }
 
         }
-
-

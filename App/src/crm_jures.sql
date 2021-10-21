@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 20 oct. 2021 à 12:39
+-- Généré le : jeu. 21 oct. 2021 à 09:20
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -266,7 +266,7 @@ INSERT INTO `detenir` (`ID_Habilitation`, `ID_Jure`) VALUES
 
 DROP TABLE IF EXISTS `entreprise`;
 CREATE TABLE IF NOT EXISTS `entreprise` (
-  `ID_Entreprise` int(5) NOT NULL AUTO_INCREMENT,
+  `ID_Entreprise` int(5) NOT NULL,
   `ID_Contact` int(5) NOT NULL,
   PRIMARY KEY (`ID_Entreprise`),
   KEY `Entreprise_Contact_FK` (`ID_Contact`)
@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
   `Libelle_formationPatern` char(255) NOT NULL,
   `Descriptif_formation` char(255) DEFAULT NULL,
   PRIMARY KEY (`ID_formationPattern`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `formationpattern`
@@ -356,8 +356,8 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
 INSERT INTO `formationpattern` (`ID_formationPattern`, `Libelle_formationPatern`, `Descriptif_formation`) VALUES
 (1, 'dev web & web mobile', 'On apprend plein de trucs supers'),
 (2, 'Formation réseau', 'On apprend plein de choses pour faire des rézos'),
-(4, 'Une formation', 'm utilise :('),
-(5, 'Une habilitation', 'm utilise :(');
+(4, 'modele 3', 'Une formation m utilise :('),
+(5, 'Modele 4', 'Une habilitation m utilise :(');
 
 -- --------------------------------------------------------
 

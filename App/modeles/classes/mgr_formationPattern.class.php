@@ -1,8 +1,7 @@
 <?php
     spl_autoload_register(function($classe){
-        include "classes/". $classe . ".class.php";
-        });
-
+    include "classes/". $classe . ".class.php";
+    });
 
     Class mgr_formationPattern {
         
@@ -131,7 +130,7 @@
      * 
      */
     public static function update($idToModify){
-var_dump('CALLED');
+//var_dump('CALLED');
         //INIT
             $var1 = $_POST['libelleNew'];
             $var2 = $_POST['descriptifNew'];
@@ -151,33 +150,35 @@ var_dump('CALLED');
             //Test doublon
                 $tempInstance = new mgr_formationPattern();
                 $list = $tempInstance->read_all();
-                $libs = [];
-                foreach($list as $item){
-                    array_push($libs, $item['Libelle_formationPatern']);
-                }
-                
-                if(in_array($var1, $libs)){
-                    throw new Exception("<strong>Duplicata de libellé - Modification impossible</strong> <br>");
-                    return null;
+                foreach($list as $item){                    
+                    if($item['Libelle_formationPatern'] == $var1){
+                        //excluding the current libelle
+                        if($item['ID_formationPattern'] != $idToModify){
+                            //filtering the rest
+                            throw new Exception("<strong>Duplicata de libellé - Modification impossible</strong> <br>");
+                            return null;
+                        }
+                    }
                 }
 
-var_dump('ALL OK');
-
+//var_dump('ALL OK');
         //UPDATE
             $sql = '
             UPDATE `formationpattern`
             SET
-            `Libelle_formationPatern` = " marchepas",
-            `Descriptif_formation` =  " marchepas"
-            WHERE `formationpattern`.`ID_formationPattern` = "8"'
+            `Libelle_formationPatern` = :var1,
+            `Descriptif_formation` =  :var2
+            WHERE `formationpattern`.`ID_formationPattern` = :idto'
             ;
             $connexion = Connector::connect();
             $res = $connexion->prepare($sql);
-            $res->execute(array($var1, $var2, $idToModify));
+            $res->bindValue(':var1', $var1, PDO::PARAM_STR);
+            $res->bindValue(':var2', $var2, PDO::PARAM_STR);
+            $res->bindValue(':idto', $idToModify, PDO::PARAM_INT);
+            $res->execute();
+//$res->debugDumpParams();
             $res->closeCursor();
             Connector::disconnect();     
             }
 
         }
-
-

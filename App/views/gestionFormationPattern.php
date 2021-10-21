@@ -16,7 +16,7 @@
                 $list = $tempInstance->read_all('formationpattern');
 
                 if(isset($_POST['modifyFormationPattern'])){
-                    //$item =  //modifyFormationPattern donne l'id
+                    $item = $list[array_search($_POST['modifyFormationPattern'],array_column($list, 'ID_formationPattern'))];
                     echo '<tr>' .
                         '<td>' . $item['Libelle_formationPatern'] . '</td>'.
                         '<td>' . $item['Descriptif_formation'] . '</td>'.
@@ -48,13 +48,15 @@
                                     <input type="text" name="descriptifNew">
                                 </td>
                                 <td colspan="2">
-                                    <input type="submit" name="modificationToConfirm" class="btn btn-success" value="Confirmer">
+                                    <form>
+                                        <input type="submit" name="modificationToConfirm" class="btn btn-success" value="Confirmer">
+                                        <input type="hidden" name="modifyFormationPattern" value="'.$_POST['modifyFormationPattern'].'">
+                                    </form>
                                 </td>
                             </form>
                         </tr>
                         '
                         ;
-
                     }
                 }
                 else{
@@ -64,10 +66,11 @@
                         '<td>' . $item['Descriptif_formation'] . '</td>'.
                         '<td>
                         <form method="POST">
-                        <button name="modifyFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-info">Modifier</button>
+                            <button name="modifyFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-info">Modifier</button>
                         </form>'.
-                        '<td><form method="POST">
-                        <button name="delFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-outline-danger">Supprimer</button>
+                        '<td>
+                        <form method="POST">
+                            <button name="delFormationPattern" value="'.$item['ID_formationPattern'].'" class="btn btn-outline-danger">Supprimer</button>
                         </form>'
                         ;    
                     }

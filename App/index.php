@@ -12,8 +12,8 @@
 
 
     //Routing
-    // print_r($_POST);
-    // print_r($_GET);
+/* var_dump($_GET);
+var_dump($_POST); */
 
     switch ($route){
         case 'home':
@@ -72,7 +72,7 @@
             }
             if( isset($_POST['modificationToConfirm'])){
                 try{
-                    mgr_formationPattern::update($_POST['modificationToConfirm']);
+                    mgr_formationPattern::update($_POST['modifyFormationPattern']);
                 }
                 catch (Exception $e){
                     echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';

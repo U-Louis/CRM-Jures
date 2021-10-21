@@ -53,39 +53,105 @@
             $vilAdresse = $_POST["vilAdresse"];
             $cpAdresse = $_POST["CPAdresse"];
             $entreprise = $_POST["entreprise"];
+            $special = $_POST["specialite1"];
 
-            $sql = "INSERT INTO contact (Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
-            VALUES (:nom,:prenom,:tel,:mail,:numAd,:rue,:comp,:ville,:cp);
+            $sql = "
+                DELIMITER |
 
-            INSERT INTO jure (ID_Contact)
-                SELECT ID_Contact
-                FROM contact
-                WHERE Nom_contact = :nom AND Prenom_contact = :prenom;
-            
-            INSERT INTO contact (Nom_contact) VALUES (:entrepr);
+                CREATE PROCEDURE prc_Ajout_Jure(
+                    IN nom CHAR(40),
+                    IN prenom CHAR(40),
+                    IN tel INT(10),
+                    IN mail CHAR(40),
+                    IN numAd INT(5),
+                    IN rue CHAR(40),
+                    IN comp CHAR(40),
+                    IN ville CHAR(40),
+                    IN cp INT(5),
+                    IN entrepr CHAR(40)
+                )
+                BEGIN
+                    DECLARE @maxIdContact INT(10) = SELECT MAX(ID_Contact) FROM contact
+                    DECLARE @idContactJure INT(10) = SELECT MAX(ID_Contact)+1 FROM contact
+                    DECLARE @idContactEntreprise INT(10) = SELECT MAX(ID_Contact)+2 FROM contact
+                    DECLARE @idJure INT(10) = SELECT MAX(ID_Jure)+1 FROM jure
+                    DECLARE @idEntreprise INT(10) = SELECT MAX(ID_Entreprise)+1 FROM entreprise
 
-            INSERT INTO entreprise (ID_Contact)
-                SELECT ID_Contact
-                FROM contact
-                WHERE Nom_contact = :entrepr;
+                    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
+                    VALUES (@maxIdContact,nom,prenom,tel,mail,numAd,rue,comp,ville,cp)
 
-            INSERT INTO travailler (ID_Entreprise, ID_Jure)
-                SELECT ID_Entreprise, ID_Jure
-                FROM entreprise e
-                JOIN contact c
-                    ON c.ID_Contact = e.ID_Contact
-                JOIN jure j
-                    ON j.ID_Contact = c.ID_Contact
-                WHERE 
+                    
+                    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (@idJure,(SELECT ID_Contact FROM contact WHERE ID_Contact=@idContactJure))
+                
+                    INSERT INTO contact (ID_Contact,Nom_contact) VALUES (@idEntreprise, entrepr)
+
+                    IF (COUNT(SELECT * FROM contact WHERE Nom_contact = :entrepr AND Prenom_contact = NULL)<1) THEN 
+                        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (@idEntreprise,@idContactEntreprise)
+                    ELSE
+                        @idEntreprise = SELECT ID_Entreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr
+                    END IF
+
+                    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (@idEntreprise, @idContactJure)
+                END|
+
+                DELIMITER ;
             ";
             
             
             $connexionPDO = Connector::getConnexion();
             $request = $connexionPDO->prepare($sql);
-            $request->execute(array(':nom'=>$name, ':prenom'=>$prenom,':tel'=>$tel,':mail'=>$mail,':numAd'=>$numAdresse,':rue'=>$libelAdresse,':comp'=>$complAdresse,':ville'=>$vilAdresse,':cp'=>$cpAdresse,':entrepr'=>$entreprise));
+            $request->execute(array('nom'=>$name, ':prenom'=>$prenom,':tel'=>$tel,':mail'=>$mail,':numAd'=>$numAdresse,':rue'=>$libelAdresse,':comp'=>$complAdresse,':ville'=>$vilAdresse,':cp'=>$cpAdresse,':entrepr'=>$entreprise, ':special'=>$special));
 
             $request->closeCursor();
             Connector::disconnect();
         }
     }
 ?>
+
+
+
+
+DELIMITER |
+
+CREATE PROCEDURE prc_Ajout_Jure(
+    IN nom CHAR(40),
+    IN prenom CHAR(40),
+    IN tel INT(10),
+    IN mail CHAR(40),
+    IN numAd INT(5),
+    IN rue CHAR(40),
+    IN comp CHAR(40),
+    IN ville CHAR(40),
+    IN cp INT(5),
+    IN entrepr CHAR(40)
+)
+BEGIN
+    DECLARE maxIdContact INT(10);
+    DECLARE idContactJure INT(10);
+    DECLARE idContactEntreprise INT(10);
+    DECLARE idJure INT(10);
+    DECLARE idEntreprise INT(10);
+    
+    SELECT MAX(ID_Contact) INTO maxIdContact FROM contact;
+    SET idContactJure := maxIdContact+1;
+    SET idContactEntreprise := maxIdContact+2;
+    SELECT MAX(ID_Jure)+1 INTO idJure FROM jure;
+    SELECT MAX(ID_Entreprise)+1 INTO idEntreprise FROM entreprise;
+
+    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
+    VALUES (maxIdContact,nom,prenom,tel,mail,numAd,rue,comp,ville,cp);
+
+    
+    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
+
+    IF (COUNT(SELECT * FROM contact WHERE Nom_contact = entrepr AND Prenom_contact = NULL)<1) THEN 
+        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
+        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idEntreprise, entrepr);
+    ELSE
+        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
+    END IF;
+
+    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
+END|
+
+DELIMITER ;

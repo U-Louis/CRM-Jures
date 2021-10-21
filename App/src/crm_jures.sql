@@ -22,6 +22,73 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+DELIMITER $$
+--
+-- Procédures
+--
+DROP PROCEDURE IF EXISTS `prc_Ajout_Jure`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40))  BEGIN
+    DECLARE maxIdContact INT(10);
+    DECLARE idContactJure INT(10);
+    DECLARE idContactEntreprise INT(10);
+    DECLARE idJure INT(10);
+    DECLARE idEntreprise INT(10);
+    
+    SELECT MAX(ID_Contact) INTO maxIdContact FROM contact;
+    SET idContactJure := maxIdContact+1;
+    SET idContactEntreprise := maxIdContact+2;
+    SELECT MAX(ID_Jure)+1 INTO idJure FROM jure;
+    SELECT MAX(ID_Entreprise)+2 INTO idEntreprise FROM entreprise;
+
+    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
+    VALUES (idContactJure,nom,prenom,tel,mail,numAd,rue,comp,ville,cp);
+
+    
+    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
+
+    IF ( (SELECT COUNT(ID_Contact) from contact WHERE Nom_contact = entrepr AND Prenom_contact IS NULL)<1) THEN 
+        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idEntreprise, entrepr);
+        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
+    ELSE
+        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
+    END IF;
+
+    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
+END$$
+
+DROP PROCEDURE IF EXISTS `prc_Ajout_Jure1`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure1` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40))  BEGIN
+    DECLARE maxIdContact INT(10);
+    DECLARE idContactJure INT(10);
+    DECLARE idContactEntreprise INT(10);
+    DECLARE idJure INT(10);
+    DECLARE idEntreprise INT(10);
+    
+    SELECT MAX(ID_Contact) INTO maxIdContact FROM contact;
+    SET idContactJure := maxIdContact+1;
+    SET idContactEntreprise := maxIdContact+2;
+    SELECT MAX(ID_Jure)+1 INTO idJure FROM jure;
+    SELECT MAX(ID_Entreprise)+1 INTO idEntreprise FROM entreprise;
+
+    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
+    VALUES (idContactJure,nom,prenom,tel,mail,numAd,rue,comp,ville,cp);
+
+    
+    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
+
+    IF ( (SELECT COUNT(ID_Contact) from contact WHERE Nom_contact = entrepr AND Prenom_contact IS NULL)<1) THEN 
+        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idContactEntreprise, entrepr);
+        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
+    ELSE
+        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
+    END IF;
+
+    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
+END$$
+
+DELIMITER ;
+
+-----------------------------------------------------------
 
 --
 -- Structure de la table `conclure`
@@ -601,7 +668,3 @@ ALTER TABLE `travailler`
   ADD CONSTRAINT `Travailler_Entreprise_FK` FOREIGN KEY (`ID_Entreprise`) REFERENCES `entreprise` (`ID_Entreprise`),
   ADD CONSTRAINT `Travailler_Jure0_FK` FOREIGN KEY (`ID_Jure`) REFERENCES `jure` (`ID_Jure`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

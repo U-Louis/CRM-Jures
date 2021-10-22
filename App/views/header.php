@@ -17,14 +17,14 @@
         <form class="container-fluid justify-content-between" method="$_GET" action="index.php">
             <img class="col-1" src="assets/img/logos/fire.png" alt="logo ">
             <input class="btn btn-info" type="submit" name="route" value="Gestion des modèles de formation">
-            <input class="btn btn-info" type="submit" name="route" value="Gestion des formations">
-            <input class="btn btn-info" type="submit" name="route" value="Gestion des formateurs">
-            <input class="btn btn-success" type="submit" name="route" value="Gestion des sessions d'examen">
+            <input class="btn btn-info" type="submit" name="route" value="Gestion des formations" disabled>
+            <input class="btn btn-info" type="submit" name="route" value="Gestion des formateurs" disabled>
+            <input class="btn btn-success" type="submit" name="route" value="Gestion des sessions d'examen"disabled>
             <input class="btn btn-success" type="submit" name="route" value="Gestion des jurés">
 
             <div class="d-flex flex-column border p-1 rounded">
-                <input class="btn btn-warning m-1" name="route" type="submit" value="Mon compte">
-                <input class="btn btn-danger" name="route" type="submit" value="Deconnexion">
+                <input class="btn btn-warning m-1" name="route" type="submit" value="Mon compte" disabled>
+                <input class="btn btn-danger" name="route" type="submit" value="Deconnexion" disabled>
             </div>
         </form>
     </nav>

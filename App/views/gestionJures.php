@@ -26,23 +26,28 @@
 var_dump($_POST);
                     
                     foreach($list as $item){
-                        echo "<tr><td>".
-                        $item["Nom_contact"].
-                        '</td><td>'.
-                        $item["Prenom_contact"]. 
-                        '</td><td>'.
-                        $item["libelle_specialite"].
-                        '</td><td>'.
-                        $item["Mail_contact"].
-                        '</td><td>
-                        <form method="POST">
+                        echo "<tr>
+                            <td>".$item["Nom_contact"].'</td>
+                            <td>'.$item["Prenom_contact"].'</td>
+                            <td>'.$item["libelle_specialite"].'</td>
+                            <td>'.$item["Mail_contact"].'</td>
+                            <td>
+                                <div class="d-flex flex-row justify-content-around">
+                                    <form method="POST">
+                                        <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                                        <input name="deleteJureId" type="hidden" value ="'.$item["ID_Contact"].'">
+                                        <input name="deleteJureLib" type="hidden" value ="'.$item["libelle_specialite"].'">
+                                        <input name="deleteJureIdJ" type="hidden" value ="'.$item["ID_Jure"].'">
 
-                            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
-                            <input name="deleteJure" type="hidden" value ="'.$item["ID_Contact"].'">
-
-                        </form>
-                            <button name="modifyJure" class="btn btn-info">Modifier</button>
-                            <button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button></td></tr>';
+                                    </form>
+                                    <form method="POST">
+                                        <button type="submit" class="btn btn-success">Modifier</button>
+                                        <input name="deleteJure" type="hidden" value ="'.$item["ID_Contact"].'">
+                                    </form>
+                                    <button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button>
+                                </div>
+                            </td>
+                        </tr>';
                     }
                 ?>
             </tbody>

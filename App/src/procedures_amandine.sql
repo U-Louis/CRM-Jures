@@ -35,3 +35,19 @@ BEGIN
     INSERT INTO specialiste (ID_Jure, libelle_specialite) VALUES (idJure, LOWER(special));    
 END$$
 DELIMITER ;
+----------------------------------------------------------------------------------------------------------------------
+DELIMITER |
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Delete_Jure`(IN `id` INT(10), IN `lib` CHAR(40))
+BEGIN 
+
+    DELETE FROM specialiste WHERE ID_Jure = id;
+
+    DELETE FROM specialite WHERE (SELECT COUNT(ID_Jure) FROM specialiste WHERE libelle_specialite = lib) = 0;
+
+    DELETE FROM jure WHERE ID_Jure = id;
+
+    
+
+
+END|
+DELIMITER ;

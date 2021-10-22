@@ -81,6 +81,18 @@
         }
 
         public static function delete() {
+            $connexionPDO = Connector::getConnexion();
+
+            $idDelete = $_POST['deleteJure'];
+
+            var_dump( $idDelete);
+            // $sql="CALL prc_Delete_Jure(:id)";
+
+            // $request = $connexionPDO->prepare($sql);
+            // $request->execute(array(":id"=>$idDelete));
+            
+            // $request->closeCursor();
+            Connector::disconnect();
 
         }
     }

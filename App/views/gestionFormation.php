@@ -18,11 +18,6 @@
                 $tempInstance = new mgr_formation();
                 $list = $tempInstance->read_all('formation');
 
-${'contact'. '5'} = new Contact('5');
-var_dump(${'contact'. '5'} );
-
-${'entreprise' . 'x'} = new Entreprise('2', $contact5);
-var_dump(${'entreprise' . 'x'});
 
                 foreach($list as $item){
                     echo '<tr>' .

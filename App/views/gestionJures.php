@@ -1,8 +1,8 @@
 <!-- GESTION DES JURES -->
 <div class="container-fluid p-4">
         <h2>Gestion des jurés</h2>
-        <input type="text" name="search-bar" placeholder="Tapez ici...">
-        <input type="button" id="search-button" value="Rechercher">
+        <input type="text" name="search-bar" placeholder="Tapez ici..." disabled>
+        <input type="button" id="search-button" value="Rechercher" disabled>
         <table id="tableGestionJures" class="table table-striped">
             <thead>
                 <tr>
@@ -39,10 +39,10 @@
 
                                     </form>
                                     <form method="POST">
-                                        <button type="submit" class="btn btn-success">Modifier</button>
+                                        <button type="submit" class="btn btn-success" disabled>Modifier</button>
                                         <input name="deleteJure" type="hidden" value ="'.$item["ID_Contact"].'">
                                     </form>
-                                    <button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button"><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button>
+                                    <button class="btn btn-outline-secondary me-2 rounded-circle p-2" type="button" disabled><img src="assets/img/logos/loupe.png" alt="loupe" style="max-height: 25px;"></button>
                                 </div>
                             </td>
                         </tr>';

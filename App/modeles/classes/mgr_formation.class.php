@@ -15,7 +15,7 @@
      */
     public static function read_all() {
         $sql = 
-            'SELECT fn.`ID_formation`, fn.`Libelle_Formation`, fn.`Date_DebutFormation`, fn.`Date_FinFormation`, c.`nom_contact`, fp.`Libelle_formationPatern`	
+            'SELECT fn.`ID_formation`, fn.`Libelle_Formation`, fn.`Date_DebutFormation`, fn.`Date_FinFormation`, c.`nom_contact`, fp.`Libelle_formationPatern`, fp.`ID_formationPattern`
              FROM formation fn
              JOIN formationPattern fp
              ON fn.ID_formationPattern = fp.ID_formationPattern

@@ -101,7 +101,7 @@
                 }
             
 
-            //test if formation is used in a formation
+            //test if formation is used in a habilitation
                 $tempInstance2 = new mgr_habilitation();
                 $listHabilitations = $tempInstance2->read_all();
                 $flagFound = false;

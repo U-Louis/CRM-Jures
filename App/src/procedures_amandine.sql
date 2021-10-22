@@ -36,17 +36,49 @@ BEGIN
 END$$
 DELIMITER ;
 ----------------------------------------------------------------------------------------------------------------------
+--Jeu d'essai
+--CALL prc_Ajout_Jure('Amandine','Pimentel de Andrade', 0768774674,'amandine.pda@gmail.com',6,'rue des marronniers','','Saint Gervais la forêt',41350,'Wazbukmuk','SQL23')
+--CALL prc_Dele_Jure()
+--CALL prc_Ajout_Jure('Manon', "Villard", 0768774674, 'manon.villard@gmail.com', 7, 'rue des marronniers', "", 'Saint Gervais la forêt', 41350, 'Facebrique', 'musculation')
+--CALL prc_Delete_Jure()
+--CALL prc_Ajout_Jure('Aurélie', 'Conan', 0768774674,'aurelie.conan@gmail.com', 8, 'rue des marronniers', '', 'Saint Gervais la forêt', 41350,'Labagarre', 'sql')
+--CALL prc_Delete_Jure()
+
+
 DELIMITER |
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Delete_Jure`(IN `id` INT(10), IN `lib` CHAR(40))
 BEGIN 
 
-    DELETE FROM specialiste WHERE ID_Jure = id;
+    BEGIN 
+    DECLARE idEntreprise INT(10);
+    DECLARE idContactEntreprise INT(10);
+    DECLARE idJure INT(10);
+    DECLARE lib CHAR(40);
 
-    DELETE FROM specialite WHERE (SELECT COUNT(ID_Jure) FROM specialiste WHERE libelle_specialite = lib) = 0;
 
-    DELETE FROM jure WHERE ID_Jure = id;
+    SELECT ID_Jure INTO idJure FROM jure WHERE ID_Contact = id;
+     SELECT ID_Entreprise INTO idEntreprise FROM travailler WHERE ID_Jure = idJure;
+      SELECT ID_Contact INTO idContactEntreprise FROM entreprise WHERE ID_Entreprise = idEntreprise;
+     SELECT libelle_specialite INTO lib FROM specialiste WHERE ID_Jure = idJure;
 
-    
+
+ 	  DELETE FROM specialiste WHERE ID_Jure = idJure;
+
+    IF ((SELECT COUNT(ID_Jure) FROM specialiste WHERE LOWER(libelle_specialite) = LOWER(lib))= 0) THEN
+        DELETE FROM specialite WHERE libelle_specialite = lib;
+    END IF;
+
+    DELETE FROM travailler WHERE ID_Jure = idJure; 
+
+    DELETE FROM jure WHERE ID_Contact = id;
+
+    IF ((SELECT COUNT(ID_Jure) FROM travailler WHERE ID_Entreprise = idEntreprise) = 0) THEN 
+        DELETE FROM entreprise WHERE ID_Contact = idContactEntreprise;
+        DELETE FROM contact WHERE ID_Contact = idContactEntreprise;
+    END IF;
+
+    DELETE FROM contact WHERE ID_Contact = id;
+
 
 
 END|

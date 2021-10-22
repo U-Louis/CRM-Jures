@@ -12,8 +12,8 @@
 
 
     //Routing
-//var_dump($_GET);
-//var_dump($_POST);
+// var_dump($_GET);
+// var_dump($_POST);
 
     switch ($route){
         case 'home':
@@ -85,8 +85,13 @@
         break;
 
         case 'Gestion des jurés':
-            if(isset($_POST["deleteJure"])){
-                JureMgr::delete();
+            if(isset($_POST["deleteJureId"])){
+                try{
+                    JureMgr::delete();
+                }
+                catch(Exception $e){
+                    echo '<div class="alert alert-warning" role="alert">'.$e->getMessage().'</div>';
+                }
             }
             require('views/header.php');
             require('views/gestionJures.php');
@@ -95,8 +100,10 @@
         
         case "Ajouter un juré":
             if(isset($_POST['nomContact']) && isset($_POST['prenomContact']) && isset($_POST['tel']) && isset($_POST['mail']) && isset($_POST['numAdresse']) && isset($_POST['libelAdresse']) && isset($_POST['vilAdresse']) && isset($_POST['CPAdresse'])){
-                echo "<script>alert('Juré bien ajouté')</script>";
                 JureMgr::create();
+                require('views/header.php');
+                require('views/gestionJures.php');
+                require('views/footer.php');
             }
             else{
                 require('views/header.php');

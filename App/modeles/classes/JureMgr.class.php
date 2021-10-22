@@ -7,6 +7,7 @@
     class JureMgr {
         /**
          * Permet d'obtenir la liste complète des noms de jurés
+         * @return array renvoie tous les jurés présents dans la BDD
          */
         public static function read_all() : array {
             // request
@@ -37,7 +38,9 @@
             return $records;
 
         }
-
+        /**
+         * Permet de créer un nouveau juré
+         */
         public static function create() {
 
             $connexionPDO = Connector::getConnexion();
@@ -70,6 +73,7 @@
     
                 $request = $connexionPDO->prepare($sql);
                 $request->execute(array(':nom'=>$name, ':prenom'=>$prenom,':tel'=>$tel,':mail'=>$mail,':numAd'=>$numAdresse,':rue'=>$libelAdresse,':comp'=>$complAdresse,':ville'=>$vilAdresse,':cp'=>$cpAdresse,':entrepr'=>$entreprise,':special'=>$special));
+                echo "<script>alert('Juré bien ajouté')</script>";
             }
             else{
                 echo "<script>alert('utilisateur déjà enregistré')</script>";
@@ -79,19 +83,41 @@
             $request->closeCursor();
                 Connector::disconnect();
         }
-
+        /**
+         * Permet de supprimer un juré qui n'a pas d'hailitation et qui n'appartient pas ç une session d'examens en cours
+         */
         public static function delete() {
+
             $connexionPDO = Connector::getConnexion();
 
-            $idDelete = $_POST["deleteJure"];
+            $idDelete = $_POST["deleteJureId"];
+            try{
+                $result=$connexionPDO->prepare("SELECT ID_SessionExamen FROM statufier s JOIN jure j ON s.ID_Jure = j.ID_Jure JOIN contact c ON j.ID_Contact = c.ID_Contact WHERE c.ID_Contact=:id");
+                $result->execute(array(':id'=>$idDelete));
+                $records = $result->fetchAll();
+    
+                
+                if(!$records){
+                    $sql = "CALL prc_Delete_Jure(:id) ";
+                    $request= $connexionPDO->prepare($sql);
+                    $request->execute(array(':id'=>$idDelete));
+    
+                    echo "<script>alert('le juré a bien été supprimé')</script>";
+                }
+                else{
+                    echo "<script>alert('le juré que vous voulez supprimer est lié à une session d'examen, vous ne pouvez donc pas le supprimer'</script>";
+                }
+                
+                $result->closeCursor();
 
-            $sql = "CALL prc_Delete_Jure(:id) ";
+            }
+            catch(PDOException $e){
+                throw new Error ("Vous ne pouvez pas supprimer ce juré parce qu'il a une habilitation");
+            }
+            finally{
+                Connector::disconnect();
+            }
 
-            $request= $connexionPDO->prepare($sql);
-            $request->execute(array(':id'=>$idDelete));
-
-            $request->closeCursor();
-            Connector::disconnect();
         }
     }
 ?>

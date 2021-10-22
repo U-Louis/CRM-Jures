@@ -23,7 +23,7 @@
                 <?php
                     $newMgrJure = new JureMgr();
                     $list = $newMgrJure->read_all();
-var_dump($_POST);
+// var_dump($_POST);
                     
                     foreach($list as $item){
                         echo "<tr>
@@ -36,8 +36,6 @@ var_dump($_POST);
                                     <form method="POST">
                                         <button type="submit" class="btn btn-outline-danger">Supprimer</button>
                                         <input name="deleteJureId" type="hidden" value ="'.$item["ID_Contact"].'">
-                                        <input name="deleteJureLib" type="hidden" value ="'.$item["libelle_specialite"].'">
-                                        <input name="deleteJureIdJ" type="hidden" value ="'.$item["ID_Jure"].'">
 
                                     </form>
                                     <form method="POST">

@@ -70,8 +70,6 @@
         <label for="dateFinHabilitation1">Fin de validité : </label>
         <input type="date" name="dateFinHabilitation1"  value="2023-11-24">
     </div>
-        
-
         <div>
             <input type="reset" class="btn btn-danger" value="Annuler">
             <input type="submit" class="btn btn-success" value="Valider">

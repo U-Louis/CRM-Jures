@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 21 oct. 2021 à 09:20
+-- Généré le : mer. 20 oct. 2021 à 12:39
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,73 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `crm jures`
 --
-
--- --------------------------------------------------------
-DELIMITER $$
---
--- Procédures
---
-DROP PROCEDURE IF EXISTS `prc_Ajout_Jure`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40))  BEGIN
-    DECLARE maxIdContact INT(10);
-    DECLARE idContactJure INT(10);
-    DECLARE idContactEntreprise INT(10);
-    DECLARE idJure INT(10);
-    DECLARE idEntreprise INT(10);
-    
-    SELECT MAX(ID_Contact) INTO maxIdContact FROM contact;
-    SET idContactJure := maxIdContact+1;
-    SET idContactEntreprise := maxIdContact+2;
-    SELECT MAX(ID_Jure)+1 INTO idJure FROM jure;
-    SELECT MAX(ID_Entreprise)+2 INTO idEntreprise FROM entreprise;
-
-    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
-    VALUES (idContactJure,nom,prenom,tel,mail,numAd,rue,comp,ville,cp);
-
-    
-    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
-
-    IF ( (SELECT COUNT(ID_Contact) from contact WHERE Nom_contact = entrepr AND Prenom_contact IS NULL)<1) THEN 
-        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idEntreprise, entrepr);
-        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
-    ELSE
-        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
-    END IF;
-
-    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
-END$$
-
-DROP PROCEDURE IF EXISTS `prc_Ajout_Jure1`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure1` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40))  BEGIN
-    DECLARE maxIdContact INT(10);
-    DECLARE idContactJure INT(10);
-    DECLARE idContactEntreprise INT(10);
-    DECLARE idJure INT(10);
-    DECLARE idEntreprise INT(10);
-    
-    SELECT MAX(ID_Contact) INTO maxIdContact FROM contact;
-    SET idContactJure := maxIdContact+1;
-    SET idContactEntreprise := maxIdContact+2;
-    SELECT MAX(ID_Jure)+1 INTO idJure FROM jure;
-    SELECT MAX(ID_Entreprise)+1 INTO idEntreprise FROM entreprise;
-
-    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
-    VALUES (idContactJure,nom,prenom,tel,mail,numAd,rue,comp,ville,cp);
-
-    
-    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
-
-    IF ( (SELECT COUNT(ID_Contact) from contact WHERE Nom_contact = entrepr AND Prenom_contact IS NULL)<1) THEN 
-        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idContactEntreprise, entrepr);
-        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
-    ELSE
-        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
-    END IF;
-
-    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
-END$$
-
-DELIMITER ;
 
 -----------------------------------------------------------
 
@@ -266,7 +199,7 @@ INSERT INTO `detenir` (`ID_Habilitation`, `ID_Jure`) VALUES
 
 DROP TABLE IF EXISTS `entreprise`;
 CREATE TABLE IF NOT EXISTS `entreprise` (
-  `ID_Entreprise` int(5) NOT NULL,
+  `ID_Entreprise` int(5) NOT NULL AUTO_INCREMENT,
   `ID_Contact` int(5) NOT NULL,
   PRIMARY KEY (`ID_Entreprise`),
   KEY `Entreprise_Contact_FK` (`ID_Contact`)
@@ -347,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
   `Libelle_formationPatern` char(255) NOT NULL,
   `Descriptif_formation` char(255) DEFAULT NULL,
   PRIMARY KEY (`ID_formationPattern`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `formationpattern`
@@ -356,8 +289,8 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
 INSERT INTO `formationpattern` (`ID_formationPattern`, `Libelle_formationPatern`, `Descriptif_formation`) VALUES
 (1, 'dev web & web mobile', 'On apprend plein de trucs supers'),
 (2, 'Formation réseau', 'On apprend plein de choses pour faire des rézos'),
-(4, 'modele 3', 'Une formation m utilise :('),
-(5, 'Modele 4', 'Une habilitation m utilise :(');
+(4, 'Une formation', 'm utilise :('),
+(5, 'Une habilitation', 'm utilise :(');
 
 -- --------------------------------------------------------
 

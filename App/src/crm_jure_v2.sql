@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 21 oct. 2021 à 09:20
+-- Généré le : ven. 22 oct. 2021 à 06:24
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -18,46 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `crm jures`
+-- Base de données : `crm jure`
 --
 
--- --------------------------------------------------------
 DELIMITER $$
 --
 -- Procédures
 --
 DROP PROCEDURE IF EXISTS `prc_Ajout_Jure`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40))  BEGIN
-    DECLARE maxIdContact INT(10);
-    DECLARE idContactJure INT(10);
-    DECLARE idContactEntreprise INT(10);
-    DECLARE idJure INT(10);
-    DECLARE idEntreprise INT(10);
-    
-    SELECT MAX(ID_Contact) INTO maxIdContact FROM contact;
-    SET idContactJure := maxIdContact+1;
-    SET idContactEntreprise := maxIdContact+2;
-    SELECT MAX(ID_Jure)+1 INTO idJure FROM jure;
-    SELECT MAX(ID_Entreprise)+2 INTO idEntreprise FROM entreprise;
-
-    INSERT INTO contact (ID_Contact, Nom_contact,Prenom_contact,Tel_contact, Mail_contact, NumeroAdresse_Contact, LibelleAdresse_Contact, ComplementAdresse_Contact, VilleAdresse_Contact, CodePostalAdresse_Contact)
-    VALUES (idContactJure,nom,prenom,tel,mail,numAd,rue,comp,ville,cp);
-
-    
-    INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
-
-    IF ( (SELECT COUNT(ID_Contact) from contact WHERE Nom_contact = entrepr AND Prenom_contact IS NULL)<1) THEN 
-        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idEntreprise, entrepr);
-        INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
-    ELSE
-        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
-    END IF;
-
-    INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
-END$$
-
-DROP PROCEDURE IF EXISTS `prc_Ajout_Jure1`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure1` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure` (IN `nom` CHAR(40), IN `prenom` CHAR(40), IN `tel` INT(10), IN `mail` CHAR(40), IN `numAd` INT(5), IN `rue` CHAR(40), IN `comp` CHAR(40), IN `ville` CHAR(40), IN `cp` INT(5), IN `entrepr` CHAR(40), IN `special` CHAR(40))  BEGIN
     DECLARE maxIdContact INT(10);
     DECLARE idContactJure INT(10);
     DECLARE idContactEntreprise INT(10);
@@ -76,19 +45,25 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `prc_Ajout_Jure1` (IN `nom` CHAR(40)
     
     INSERT INTO jure (ID_Jure,ID_Contact) VALUES (idJure,idContactJure);
 
-    IF ( (SELECT COUNT(ID_Contact) from contact WHERE Nom_contact = entrepr AND Prenom_contact IS NULL)<1) THEN 
-        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idContactEntreprise, entrepr);
+    IF ( (SELECT COUNT(ID_Contact) from contact WHERE LOWER(Nom_contact) = LOWER(entrepr) AND Prenom_contact IS NULL)<1) THEN 
+        INSERT INTO contact (ID_Contact,Nom_contact) VALUES (idContactEntreprise, LOWER(entrepr));
         INSERT INTO entreprise (ID_Entreprise, ID_Contact) VALUES (idEntreprise,idContactEntreprise);
     ELSE
-        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE Nom_contact = entrepr;
+        SELECT ID_Entreprise INTO idEntreprise FROM entreprise e JOIN contact c ON e.ID_Contact = c.ID_Contact WHERE LOWER(Nom_contact) = LOWER(entrepr);
     END IF;
 
     INSERT INTO travailler (ID_Entreprise, ID_Jure) VALUES (idEntreprise, idJure);
+    
+    IF ((SELECT COUNT(libelle_specialite) FROM specialite WHERE LOWER(libelle_specialite) = LOWER(special))<1) THEN
+        INSERT INTO specialite (libelle_specialite) VALUES (LOWER(special));
+    END IF;
+    
+    INSERT INTO specialiste (ID_Jure, libelle_specialite) VALUES (idJure, LOWER(special));    
 END$$
 
 DELIMITER ;
 
------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `conclure`
@@ -122,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `VilleAdresse_Contact` char(75) DEFAULT NULL,
   `CodePostalAdresse_Contact` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_Contact`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `contact`
@@ -137,7 +112,7 @@ INSERT INTO `contact` (`ID_Contact`, `Nom_contact`, `Prenom_contact`, `Tel_conta
 (6, 'Dujardin', 'Jean-Baptiste', 201710405, 601710405, 'd.jb@gmail.com', 22, 'rue des framboises', '', 'Chepstow', 45620),
 (7, 'Delafose', 'Omer ', 271020405, 671020405, 'd.omer@gmail.com', 10, 'rue des beaux pieds', '', 'Edinburgh', 12460),
 (8, 'Peltier', 'Robert ', 203050405, 603050405, 'p.robert@gmail.com', 11, 'rue des galettes', '', 'Pinnella', 14530),
-(9, 'Baillairgé', 'Gabriel ', 244020405, 644020405, 'b.gabriel@hotmail.fr', 14, 'impasse des cookies', '', 'Caelkirk', 53530),
+(9, 'Baillairgé', 'Gabriel', 244020405, 644020405, 'b.gabriel@hotmail.fr', 14, 'impasse des cookies', '', 'Caelkirk', 53530),
 (10, 'Dupuy', 'Gaétan ', 201020490, 601020490, 'd.gaetan@gmail.com', 16, 'avenue des cavendish', '', 'BananawarholLand', 89130),
 (11, 'Rémy', 'Richard', 204620405, 604620405, 'r.richard@gmail.com', 21, 'boulevard des mariés', '', 'Marriedland', 10000),
 (12, 'Gérin', 'Côme', 266020405, 666020405, 'g.come@gmail.com', 89, 'rue des biscuits', '', 'Caelkirk', 53530),
@@ -266,11 +241,11 @@ INSERT INTO `detenir` (`ID_Habilitation`, `ID_Jure`) VALUES
 
 DROP TABLE IF EXISTS `entreprise`;
 CREATE TABLE IF NOT EXISTS `entreprise` (
-  `ID_Entreprise` int(5) NOT NULL,
+  `ID_Entreprise` int(5) NOT NULL AUTO_INCREMENT,
   `ID_Contact` int(5) NOT NULL,
   PRIMARY KEY (`ID_Entreprise`),
   KEY `Entreprise_Contact_FK` (`ID_Contact`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `entreprise`
@@ -322,9 +297,7 @@ CREATE TABLE IF NOT EXISTS `formation` (
   `ID_formateur` int(5) NOT NULL,
   `ID_formationPattern` char(5) NOT NULL,
   PRIMARY KEY (`ID_formation`),
-  KEY `Habilitation_FormationPattern_FK` (`ID_formationPattern`)
-
-
+  KEY `Formation_Formateur_FK` (`ID_formateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -332,10 +305,10 @@ CREATE TABLE IF NOT EXISTS `formation` (
 --
 
 INSERT INTO `formation` (`ID_formation`, `Libelle_Formation`, `Date_DebutFormation`, `Date_FinFormation`, `ID_formateur`, `ID_formationPattern`) VALUES
-('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 1, '1'),
-('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 3, '4'),
-('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 2, '2'),
-('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 4, '2');
+('DWWM1', 'Ce sont les pionniers de la formation dev web & web mobile !', '2017-01-01', '2017-07-01', 1, 'DWWM'),
+('DWWM2', 'Les suivants de la DWWM', '2018-01-01', '2018-07-01', 3, 'DWWM'),
+('RZO1', 'Ce sont les pionniers de la formation réseau !', '2017-02-05', '2017-07-05', 2, 'RZO'),
+('RZO2', 'Les suivants de la formation réseau', '2018-06-05', '2019-12-05', 4, 'RZO');
 
 -- --------------------------------------------------------
 
@@ -349,17 +322,14 @@ CREATE TABLE IF NOT EXISTS `formationpattern` (
   `Libelle_formationPatern` char(255) NOT NULL,
   `Descriptif_formation` char(255) DEFAULT NULL,
   PRIMARY KEY (`ID_formationPattern`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `formationpattern`
 --
 
 INSERT INTO `formationpattern` (`ID_formationPattern`, `Libelle_formationPatern`, `Descriptif_formation`) VALUES
-(1, 'dev web & web mobile', 'On apprend plein de trucs supers'),
-(2, 'Formation réseau', 'On apprend plein de choses pour faire des rézos'),
-(4, 'modele 3', 'Une formation m utilise :('),
-(5, 'Modele 4', 'Une habilitation m utilise :(');
+(2, 'Formation réseau', 'On apprend plein de choses pour faire des rézos');
 
 -- --------------------------------------------------------
 
@@ -373,44 +343,41 @@ CREATE TABLE IF NOT EXISTS `habilitation` (
   `Libelle_Habilitation` char(50) NOT NULL,
   `DebutValidite_Habilitation` date DEFAULT NULL,
   `FinValidite_Habilitation` date DEFAULT NULL,
-  `ID_formationPattern` int(5) NOT NULL,
-  PRIMARY KEY (`ID_Habilitation`),
-  KEY `Habilitation_FormationPattern_FK` (`ID_formationPattern`)
-) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ID_Habilitation`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `habilitation`
 --
 
-INSERT INTO `habilitation` (`ID_Habilitation`, `Libelle_Habilitation`, `DebutValidite_Habilitation`, `FinValidite_Habilitation`, `ID_formationPattern`) VALUES
-(1, 'Web', '2001-09-15', '2022-04-06', 1),
-(2, 'Web', '2002-08-15', '2022-04-06', 1),
-(3, 'Web', '2003-09-15', '2022-04-06', 1),
-(4, 'Web', '2004-11-15', '2022-04-06', 1),
-(5, 'Web', '2005-09-15', '2022-04-06', 1),
-(6, 'Web', '2006-09-15', '2022-04-06', 1),
-(7, 'Reseau', '1971-09-01', '2031-09-02', 2),
-(8, 'Reseau', '1981-09-01', '2031-09-02', 2),
-(9, 'Reseau', '1991-09-01', '2031-09-02', 2),
-(10, 'Reseau', '1975-09-01', '2031-09-02', 2),
-(11, 'Reseau', '1985-09-01', '2031-09-02', 2),
-(12, 'Reseau', '1901-09-01', '2031-09-02', 2),
-(15, 'Reseau', '2021-09-22', '2020-04-09', 2),
-(16, 'Reseau', '2021-09-22', '2020-04-09', 2),
-(17, 'Reseau', '2000-09-22', '2001-04-09', 2),
-(18, 'Reseau', '2021-09-22', '2020-04-10', 2),
-(19, 'Reseau', '2021-09-22', '2020-05-09', 2),
-(20, 'Web', '2001-09-22', '2021-03-09', 1),
-(21, 'Web', '2001-09-22', '2020-04-09', 1),
-(22, 'Web', '2001-09-22', '2020-05-09', 1),
-(23, 'Web', '2001-09-22', '2020-06-09', 1),
-(24, 'Web', '2001-09-22', '2020-01-09', 1),
-(25, 'Web', '2001-09-22', '2021-03-09', 1),
-(26, 'Web', '2001-09-22', '2020-04-09', 1),
-(27, 'Reseau', '2001-09-22', '2020-05-09', 2),
-(28, 'Reseau', '2001-09-22', '2020-06-09', 1),
-(29, 'Web', '2001-09-22', '2020-01-09', 1),
-(300, 'mince alors', '2021-10-05', '2021-10-15', 5);
+INSERT INTO `habilitation` (`ID_Habilitation`, `Libelle_Habilitation`, `DebutValidite_Habilitation`, `FinValidite_Habilitation`) VALUES
+(1, 'Web', '2001-09-15', '2022-04-06'),
+(2, 'Web', '2002-08-15', '2022-04-06'),
+(3, 'Web', '2003-09-15', '2022-04-06'),
+(4, 'Web', '2004-11-15', '2022-04-06'),
+(5, 'Web', '2005-09-15', '2022-04-06'),
+(6, 'Web', '2006-09-15', '2022-04-06'),
+(7, 'Reseau', '1971-09-01', '2031-09-02'),
+(8, 'Reseau', '1981-09-01', '2031-09-02'),
+(9, 'Reseau', '1991-09-01', '2031-09-02'),
+(10, 'Reseau', '1975-09-01', '2031-09-02'),
+(11, 'Reseau', '1985-09-01', '2031-09-02'),
+(12, 'Reseau', '1901-09-01', '2031-09-02'),
+(15, 'Reseau', '2021-09-22', '2020-04-09'),
+(16, 'Reseau', '2021-09-22', '2020-04-09'),
+(17, 'Reseau', '2000-09-22', '2001-04-09'),
+(18, 'Reseau', '2021-09-22', '2020-04-10'),
+(19, 'Reseau', '2021-09-22', '2020-05-09'),
+(20, 'Web', '2001-09-22', '2021-03-09'),
+(21, 'Web', '2001-09-22', '2020-04-09'),
+(22, 'Web', '2001-09-22', '2020-05-09'),
+(23, 'Web', '2001-09-22', '2020-06-09'),
+(24, 'Web', '2001-09-22', '2020-01-09'),
+(25, 'Web', '2001-09-22', '2021-03-09'),
+(26, 'Web', '2001-09-22', '2020-04-09'),
+(27, 'Reseau', '2001-09-22', '2020-05-09'),
+(28, 'Reseau', '2001-09-22', '2020-06-09'),
+(29, 'Web', '2001-09-22', '2020-01-09');
 
 -- --------------------------------------------------------
 
@@ -424,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `jure` (
   `ID_Contact` int(5) NOT NULL,
   PRIMARY KEY (`ID_Jure`),
   KEY `Jure_Contact_FK` (`ID_Contact`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `jure`
@@ -476,7 +443,15 @@ CREATE TABLE IF NOT EXISTS `sessionexamen` (
   `Debut_SessionExamen` date DEFAULT NULL,
   `Fin_SessionExamen` date DEFAULT NULL,
   PRIMARY KEY (`ID_SessionExamen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `sessionexamen`
+--
+
+INSERT INTO `sessionexamen` (`ID_SessionExamen`, `Libelle_SessionExamen`, `Debut_SessionExamen`, `Fin_SessionExamen`) VALUES
+(1, 'The final countdown', NULL, NULL),
+(2, 'Naruto vs Sasuke', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -556,6 +531,7 @@ CREATE TABLE IF NOT EXISTS `specialite` (
 --
 
 INSERT INTO `specialite` (`libelle_specialite`) VALUES
+('BHDU'),
 ('Charcuterie'),
 ('JavaScript'),
 ('PHP'),
@@ -578,6 +554,14 @@ CREATE TABLE IF NOT EXISTS `statufier` (
   KEY `Statufier_SessionExamen0_FK` (`ID_SessionExamen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `statufier`
+--
+
+INSERT INTO `statufier` (`ID_Jure`, `ID_SessionExamen`, `Commentaire`, `Statut`) VALUES
+(23, 1, NULL, 'ok'),
+(30, 2, NULL, 'ok');
+
 -- --------------------------------------------------------
 
 --
@@ -591,6 +575,15 @@ CREATE TABLE IF NOT EXISTS `travailler` (
   PRIMARY KEY (`ID_Entreprise`,`ID_Jure`),
   KEY `Travailler_Jure0_FK` (`ID_Jure`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `travailler`
+--
+
+INSERT INTO `travailler` (`ID_Entreprise`, `ID_Jure`) VALUES
+(4, 29),
+(4, 32),
+(5, 37);
 
 -- --------------------------------------------------------
 
@@ -670,3 +663,7 @@ ALTER TABLE `travailler`
   ADD CONSTRAINT `Travailler_Entreprise_FK` FOREIGN KEY (`ID_Entreprise`) REFERENCES `entreprise` (`ID_Entreprise`),
   ADD CONSTRAINT `Travailler_Jure0_FK` FOREIGN KEY (`ID_Jure`) REFERENCES `jure` (`ID_Jure`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
